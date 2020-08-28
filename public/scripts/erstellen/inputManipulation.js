@@ -1,5 +1,11 @@
 var originalBtnPos; // save the original position of the add input button
 
+document.getElementById('NameInput');
+document.getElementById('NameInput').addEventListener('keyup', function (event) {
+    updatedTitle();
+    next("titleUnlock");
+});
+
 /**
  * adds a new input
  * @param {string} type name of the input type
@@ -182,7 +188,14 @@ function createInput(type) {
                 if (emptyInput == false)addInput("Alt");
             }
         });
-
+        newInput.addEventListener('keyup', function (event) {
+            overview();
+        });
+        if (altCounter == 2) {
+            newInput.addEventListener('keydown', function (event) {
+                next("altUnlock");
+            });
+        }
 		if (altCounter >= maxAlternatives) {
 			hideBtn(document.getElementById("addAlternativeButton"));
 		}
@@ -216,6 +229,14 @@ function createInput(type) {
                 if (emptyInput == false) addInput("Crit");
             }
         });
+        newInput.addEventListener('keyup', function (event) {
+            overview();
+        });
+        if (critCounter == 1) {
+            newInput.addEventListener('keydown', function (event) {
+                next("critUnlock");
+            });
+        }
 
 		if (critCounter >= maxCriterias) {
 			hideBtn(document.getElementById("addCriteriaButton"));

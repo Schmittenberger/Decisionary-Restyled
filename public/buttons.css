@@ -123,10 +123,10 @@ button:hover {
 }
 
 .navButton {
-    position: absolute;
+    position: relative;
     margin: 20px;
     margin-bottom: 40px;
-    bottom: -145px;
+    bottom: 0px;
     width: 80px;
     height: 40px;
     border-radius: 10%;

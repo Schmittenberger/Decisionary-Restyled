@@ -2,19 +2,20 @@ block layout-content
     div.w3-row.hundredHeight
         div.w3-col.l10.s10
             div.innerPadding
-                h1 Übersicht
-                div#overview
-                    div#OverviewDesc Kontrollieren Sie Ihre Eingaben, bevor Sie die Erstellung der Umfrage abschließen.
-                    span
+                a#overJump.jump
+                h1(style="display:none") Übersicht
+                div#overview(style='padding-top:10px;')
+                    div#OverviewDesc Kontrollieren Sie Ihre Eingaben, bevor Sie die Erstellung der Umfrage abschließen.  Mit dem Klick auf Senden wird die Umfrage festgelegt.
+                    span(style="display:none")
                         span.fakeH3Span Name: 
                         span#nameSpan
                     br
-                    span.fakeH3Span Beschreibung:
-                    span#descriptionSpan
+                    span.fakeH3Span(style="display:none") Beschreibung:
+                    span#descriptionSpan(style="display:none")
                     br
-                    div#overviewTables
+                    div#overviewTables(style="display:none")
                         table#combinedTable
-        div.w3-col.l2.s2.hundredHeight
+        div.w3-col.l2.s2.hundredHeight(style="display:none")
             div.hint#overviewHint
                 h4 Info
                 span 

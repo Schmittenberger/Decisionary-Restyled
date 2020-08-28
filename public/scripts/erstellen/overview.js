@@ -2,15 +2,16 @@
 * base function called to create the overview of all inputs up to now
 */
 function overview() {
-	var nameSpan = document.getElementById("nameSpan");
+	
 	var descriptionSpan = document.getElementById("descriptionSpan");
 
 	showHints(document.getElementById("overviewHint"));
 
 	clearTable(document.getElementById("combinedTable"));
-
-    nameSpan.innerHTML = currentPoll.title;
-    if (currentPoll.description == "") {
+    var nameSpan = document.getElementById("nameSpan");
+    //currentPoll.title = document.getElementById('NameInput').value;
+    nameSpan.innerHTML = document.getElementById('NameInput').value;
+    if (descriptionSpan.innerHTML == "") {
         descriptionSpan.innerHTML = " nicht vorhanden";
         descriptionSpan.style.fontStyle = "italic";
     }
@@ -23,6 +24,11 @@ function overview() {
     fillPoll();
 
 	createTableOverview(currentPoll.getAllAlternatives(), currentPoll.getAllCriterias());
+}
+
+function updatedTitle(){
+    var nameSpan = document.getElementById("nameSpan");
+    nameSpan.innerHTML = document.getElementById('NameInput').value;
 }
 /**
  * clear poll alternatives and criterias before filling them up again

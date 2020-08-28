@@ -14,7 +14,7 @@ function hideView(view) {
 function specificViewChanges(curView) {
     if(!clickViewBool) passiveNavHover();
 	document.getElementById("navBack").style.visibility = "visible";
-	document.getElementById("navNext").style.visibility = "visible";
+	document.getElementById("navNext").style.visibility = "hidden";
 
 	switch (curView) {
 		case 0: // current view is "Thema", we are at the beginning
@@ -36,18 +36,19 @@ function specificViewChanges(curView) {
 			overview();
 			addPencil();
 			makeNavClickable();
-			addMouseHover();
+            addMouseHover();
+            document.getElementById("navNext").style.visibility = "visible";
 			return;
 			break;
 		case 4:	// current view is "Link teilen" aka we are done
-
+            shareRemoveSteps();
 			document.getElementById("navBack").style.visibility = "hidden";
 			document.getElementById("navNext").style.visibility = "hidden";
 			document.getElementById("InputTeilnehmen").value = baseUrl + "/" + currentPoll.id;
 			document.getElementById("InputAuswerten").value = baseUrl + "/auswertung/" + currentPoll.id ;
             document.getElementById("selberTeilnehmenLink").href = "/" + currentPoll.id ;
 			makeNavUnclickable();
-			removePencil()
+            removePencil();
 			break;
 		default:
 			break;
@@ -65,6 +66,12 @@ function disableNavElement(nav) {
     document.getElementById(nav).style.backgroundColor = navDisabledColor;
 }
 
+function shareRemoveSteps() {
+    document.getElementById("step1Topic").remove();
+    document.getElementById("step2Alternatives").remove();
+    document.getElementById("step3Criterias").remove();
+    document.getElementById("step4Overview").remove();
+}
 
 /**
  * adds a pencil to the first three nav Elements

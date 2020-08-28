@@ -1,33 +1,75 @@
 /**
  * move to the next view
  */
-function next() {
-    
-    if (assertView()) {
-        scrollToTop("stepsContainer");
-        hideView(schritte[currentView]);
-
-
-        disableNavElement(schritteNav[currentView]);
-        modifyData(currentView); // was macht diese Funktion hier?
-        if (currentView < schritte.length - 1) {
+var titleFlag = false;
+var altViewFlag = false;
+var critViewFlag = false;
+function next(flag) {
+    console.log(titleFlag);
+    if (flag == "titleUnlock") {
+        if (titleFlag == false) {
+            titleFlag = true;
             currentView += 1;
-        } else {
-            currentView = 0;
+            document.getElementById(schritte[currentView]).style.visibility = "visible";
+            document.getElementById(schritte[currentView]).style.display = "block";
+            specificViewChanges(currentView);
+            document.getElementById("NameInput").focus();
+            modifyData(0);
+            
         }
-        document.getElementById(schritte[currentView]).style.visibility = "visible";
-        document.getElementById(schritteNav[currentView]).style.backgroundColor = navActiveColor;
-        specificViewChanges(currentView);
-        if (currentView == 4) { // sending the data to the server to create a poll
-
-            clearPoll();// fill poll object again just to be on the safe side
-            fillPoll();
-
-            sendPoll();
-            sendEmptyResult();// send an empty vote to fill up the results file to show some empty data even before the first person has participated
-            iniliazeAggMatrix();
-        }
+        return;
     }
+    if (flag == "altUnlock") {
+        if (altViewFlag == false) {
+            altViewFlag = true;
+            currentView += 1;
+            document.getElementById(schritte[currentView]).style.visibility = "visible";
+            document.getElementById(schritte[currentView]).style.display = "block";
+            specificViewChanges(currentView);
+            
+            window.location = "#critJump";
+            document.getElementsByClassName("AlternativeInputs")[1].focus();
+            
+        }
+        return;
+    }
+    if (flag == "critUnlock") {
+        if (critViewFlag == false) {
+            critViewFlag = true;
+            currentView += 1;
+            document.getElementById(schritte[currentView]).style.visibility = "visible";
+            document.getElementById(schritte[currentView]).style.display = "block";
+            specificViewChanges(currentView); 
+            window.location = "#overJump";
+            document.getElementsByClassName("CriteriaInputs")[0].focus();
+
+        }
+        return;
+    }
+        if (assertView()) {
+            disableNavElement(schritteNav[currentView]);
+            //modifyData(currentView); // was macht diese Funktion hier?
+            if (currentView < schritte.length - 1) {
+                currentView += 1;
+            } else {
+                currentView = 0;
+            }
+            document.getElementById(schritte[currentView]).style.visibility = "visible";
+            document.getElementById(schritte[currentView]).style.display = "block";
+            console.log(document.getElementById(schritte[currentView]));
+            document.getElementById(schritteNav[currentView]).style.backgroundColor = navActiveColor;
+            specificViewChanges(currentView);
+            if (currentView == 4) { // sending the data to the server to create a poll
+
+                clearPoll();// fill poll object again just to be on the safe side
+                fillPoll();
+
+                sendPoll();
+                sendEmptyResult();// send an empty vote to fill up the results file to show some empty data even before the first person has participated
+                iniliazeAggMatrix();
+            }
+        }
+    
 }
 
 
@@ -37,7 +79,6 @@ function next() {
  */
 function back()
 {
-    scrollToTop("stepsContainer");
 	hideView(schritte[currentView]);
 	disableNavElement(schritteNav[currentView]);
 	if (currentView > 0) {
@@ -52,73 +93,69 @@ function back()
 /**
  * check if all inputs have been entered before moving to next view
  * */
-function assertView()
-{
+function assertView(){
+    var temp = assertViewReal();
+    if (temp == false) {
+        shake(document.getElementById("navNext"),5);
+        return false;
+    }
+    return true;
 
-	switch (currentView)
-	{
-		case 0: // current view is "Thema", we are at the beginning
-			nameInput = document.getElementById("NameInput");
-			startHint = document.getElementById("startHint");
-			unHighlightInput(nameInput);
-			hideHints(startHint);
-			//startHint.style.opacity = 0;
-
-			if (nameInput.value == "") {
-				highlightInput(nameInput);
-				nameInput.placeholder = "Bitte einen Namen eingeben";
-
-				showHints(startHint);
-				return false;
-			}
-
-			break;
-		case 1:	// current view is "Alternativen"
-			altFlagAssert = true;
-			altHint = document.getElementById("altHint");
-			hideHints(altHint);
-			altsCheck = document.getElementsByClassName("AlternativeInputs");
-			for (var i = 0; i < altsCheck.length; i++) {
-				unHighlightInput(altsCheck[i]);
-				if (altsCheck[i].value == "") {
-					highlightInput(altsCheck[i]);
-					altsCheck[i].placeholder = "Alternative eingeben";
-					showHints(altHint);
-					altFlagAssert = false;
-				}
-			}
-			return altFlagAssert;
-
-			break;
-		case 2: // current view is "Kriterien"
-			critFlagAssert = true;
-			critsCheck = document.getElementsByClassName("CriteriaInputs");
-			critHint = document.getElementById("critHint");
-			hideHints(critHint);
-
-			for (var i = 0; i < critsCheck.length; i++) {
-				unHighlightInput(critsCheck[i]);
-				if (critsCheck[i].value == "") {
-					highlightInput(critsCheck[i]);
-					critsCheck[i].placeholder = "Kriterium eingeben";
-					showHints(critHint);
-					critFlagAssert = false;
-				}
-			}
-			return critFlagAssert;
-			break;
-		case 3:	// current view is "Uebersicht"
-			return true;
-			break;
-		case 4:	// current view is "Link teilen" aka we are done
-			return true;
-			break;
-		default:
-			return true;
-	}
-	return true;
 }
+function assertViewReal() {
+    nameInput = document.getElementById("NameInput");
+    startHint = document.getElementById("startHint");
+    critsCheck = document.getElementsByClassName("CriteriaInputs");
+    critHint = document.getElementById("critHint");
+    altsCheck = document.getElementsByClassName("AlternativeInputs");
+    altHint = document.getElementById("altHint");
 
+    unHighlightInput(nameInput);
+    hideHints(startHint);
+    hideHints(altHint);
+    hideHints(critHint);
+
+    for (var i = 0; i < critsCheck.length; i++) {
+        unHighlightInput(critsCheck[i]);
+    }
+    for (var i = 0; i < altsCheck.length; i++) {
+        unHighlightInput(altsCheck[i]);
+    }
+
+    if (nameInput.value == "") {
+        highlightInput(nameInput);
+        nameInput.placeholder = "Bitte einen Namen eingeben";
+
+        showHints(startHint);
+        window.location = "#TopicJump";
+        return false;
+    }
+
+    altFlagAssert = true;
+    for (var i = 0; i < altsCheck.length; i++) {
+        if (altsCheck[i].value == "") {
+            highlightInput(altsCheck[i]);
+            altsCheck[i].placeholder = "Alternative eingeben";
+            showHints(altHint);
+            window.location = "#AltJump";
+            altFlagAssert = false;
+        }
+    }
+    if (altFlagAssert == false) return altFlagAssert;
+
+    critFlagAssert = true;
+    for (var i = 0; i < critsCheck.length; i++) {
+        if (critsCheck[i].value == "") {
+            highlightInput(critsCheck[i]);
+            critsCheck[i].placeholder = "Kriterium eingeben";
+            showHints(critHint);
+            window.location = "#critJump";
+            critFlagAssert = false;
+        }
+    }
+    if (critFlagAssert == false) return critFlagAssert;
+    return true;
+}
 
 function sendPoll() {
     //mistreating a get request as a pseudo post to save on some header space, because only literal knowledge is transferred and no semantic is required.

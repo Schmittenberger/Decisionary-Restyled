@@ -1,17 +1,14 @@
 /**
  * move to the next view
  */
-var titleFlag = false;
-var altViewFlag = false;
-var critViewFlag = false;
+
 function next(flag) {
-    console.log(titleFlag);
     if (flag == "titleUnlock") {
         if (titleFlag == false) {
             titleFlag = true;
             currentView += 1;
-            document.getElementById(schritte[currentView]).style.visibility = "visible";
-            document.getElementById(schritte[currentView]).style.display = "block";
+            showView(document.getElementById(schritte[currentView]));
+
             specificViewChanges(currentView);
             document.getElementById("NameInput").focus();
             modifyData(0);
@@ -23,8 +20,7 @@ function next(flag) {
         if (altViewFlag == false) {
             altViewFlag = true;
             currentView += 1;
-            document.getElementById(schritte[currentView]).style.visibility = "visible";
-            document.getElementById(schritte[currentView]).style.display = "block";
+            showView(document.getElementById(schritte[currentView]));
             specificViewChanges(currentView);
             
             window.location = "#critJump";
@@ -37,8 +33,7 @@ function next(flag) {
         if (critViewFlag == false) {
             critViewFlag = true;
             currentView += 1;
-            document.getElementById(schritte[currentView]).style.visibility = "visible";
-            document.getElementById(schritte[currentView]).style.display = "block";
+            showView(document.getElementById(schritte[currentView]));
             specificViewChanges(currentView); 
             window.location = "#overJump";
             document.getElementsByClassName("CriteriaInputs")[0].focus();
@@ -54,9 +49,7 @@ function next(flag) {
             } else {
                 currentView = 0;
             }
-            document.getElementById(schritte[currentView]).style.visibility = "visible";
-            document.getElementById(schritte[currentView]).style.display = "block";
-            console.log(document.getElementById(schritte[currentView]));
+            showView(document.getElementById(schritte[currentView]));
             document.getElementById(schritteNav[currentView]).style.backgroundColor = navActiveColor;
             specificViewChanges(currentView);
             if (currentView == 4) { // sending the data to the server to create a poll
@@ -102,6 +95,7 @@ function assertView(){
     return true;
 
 }
+
 function assertViewReal() {
     nameInput = document.getElementById("NameInput");
     startHint = document.getElementById("startHint");

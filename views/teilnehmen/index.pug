@@ -1,13 +1,14 @@
 extends ../layout
 block layout-content
     div#creationContainer
+        div#logo
         img(src='icons/Logo.svg').logoImage.noselect
-        div.navigator#navigatorTop
+        div.navigator#navigatorTop(style="display:none")
             include navigator.pug
         div.stepsContainer
             div.topStepPadding
                 span.invisible --
-            div#step1Name.Steps
+            div#step1Name.Steps(style='display:block;opacity:1')
                 include Step1Name.pug
             div#step2CriteriaOrder.Steps
                 include Step2CriteriaOrder.pug
@@ -16,7 +17,7 @@ block layout-content
             div#step4Overview.Steps
                 include Step4OverviewTeilnehmen.pug
                     
-        img.navButton#navBack(onclick='back()').noselect
+        img.navButton#navBack(onclick='back()' style='display:none').noselect
         img.navButton#navNext(onclick='next()').noselect
 
     

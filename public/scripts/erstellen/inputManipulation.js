@@ -1,9 +1,8 @@
 var originalBtnPos; // save the original position of the add input button
 
-document.getElementById('NameInput');
 document.getElementById('NameInput').addEventListener('keyup', function (event) {
     updatedTitle();
-    next("titleUnlock");
+    if (!titleFlag) setTimeout(function () { next("titleUnlock");}, showDelay);
 });
 
 /**
@@ -193,7 +192,7 @@ function createInput(type) {
         });
         if (altCounter == 2) {
             newInput.addEventListener('keydown', function (event) {
-                next("altUnlock");
+                if (!altViewFlag) setTimeout(function () { next("altUnlock"); }, showDelay);
             });
         }
 		if (altCounter >= maxAlternatives) {
@@ -234,7 +233,8 @@ function createInput(type) {
         });
         if (critCounter == 1) {
             newInput.addEventListener('keydown', function (event) {
-                next("critUnlock");
+                
+                if (!critViewFlag) setTimeout(function () { next("critUnlock"); }, showDelay);
             });
         }
 

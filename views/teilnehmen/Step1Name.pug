@@ -2,16 +2,11 @@ block layout-content
     div.w3-row.hundredHeight
         div.w3-col.l10.s10
             div.innerPadding
-                h1 Umfrage zum Thema: 
-                    span#ThemaSpan
-                h3#beschreibungSpan Beschreibung:
-                    span#BeschreibungSpan
+                h1#ThemaSpan
+                span#BeschreibungSpan
                 h2#teilnehmerNameH2 Ihr Name:
                     input#TeilnehmerNameInput(autofocus)
-                br
-                br
-                h4 Zur Auswahl stehenden Alternativen:
-                table#WelcomeAltTable
+                table#WelcomeAltTable(style="display:none")
         div.w3-col.l2.s2.hundredHeight
             div.hint#nameHint
                 h4 Info

@@ -20,19 +20,20 @@ function hideView(view) {
  */
 function specificViewChanges(curView) {
     document.getElementById("curAlt").style.visibility = "hidden";
-    if (!clickViewBool) passiveNavHover();
+    //if (!clickViewBool) passiveNavHover();
 	document.getElementById("navBack").style.visibility = "visible";
 	document.getElementById("navNext").style.visibility = "visible";
     document.getElementById("navNext").onclick = next;
 	switch (curView) {
 		case 0: // current view is "name", we are at the beginning
-			document.getElementById("navBack").style.visibility = "hidden";
-            document.getElementById("navNext").src = 'icons/teilnehmen_blau.svg';
+			//document.getElementById("navBack").style.visibility = "hidden";
+            //document.getElementById("navNext").src = 'icons/teilnehmen_blau.svg';
 			updateAlternativeHUD();
 			alternativeRatingViewFlag = false;
 			return;
 			break;
-		case 1:	// current view is "Kriterien Reihenfolge"
+        case 1:	// current view is "Kriterien Reihenfolge"
+            console.log("specific view 1");
 			if (!orderHintFlag) showHints(document.getElementById("orderHint"));
 			alternativeRatingViewFlag = false;
 			break;

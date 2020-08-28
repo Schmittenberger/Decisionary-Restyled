@@ -1,19 +1,22 @@
 var alternativeRatingViewFlag = false;
 
+document.getElementById('TeilnehmerNameInput').addEventListener('keyup', function (event) {
+    if (!nameFlag) setTimeout(function () { unlockView("nameUnlock"); }, showDelay);
+});
+
 /**
  * move to the next view
  */
 function next() {
     
     if (!alternativeRatingViewFlag && assertView()) {
-        scrollToTop("stepsContainer");
-		hideView(schritteTeilnehmen[currentView]);
-		disableNavElement(schritteNavTeilnehmen[currentView]);
+		//hideView(schritteTeilnehmen[currentView]);
+		//disableNavElement(schritteNavTeilnehmen[currentView]);
 		if (currentView < schritteTeilnehmen.length - 1) {
 			currentView += 1;
 		} 
 		document.getElementById(schritteTeilnehmen[currentView]).style.visibility = "visible";
-		document.getElementById(schritteNavTeilnehmen[currentView]).style.backgroundColor = navActiveTeilnehmenColor;
+		//document.getElementById(schritteNavTeilnehmen[currentView]).style.backgroundColor = navActiveTeilnehmenColor;
 		specificViewChanges(currentView);
 		if (currentView == 2) { // reached the alternative ratings view where we will "fake" move next, but stay at current view
             alternativeRatingViewFlag = true;
@@ -35,11 +38,38 @@ function next() {
     }
 }
 
+function unlockView(flag) {
+    if (flag == "nameUnlock") {
+        if (nameFlag == false) {
+            nameFlag = true;
+            currentView += 1;
+            showView(document.getElementById(schritteTeilnehmen[currentView]));
+
+            specificViewChanges(currentView);
+            document.getElementById("TeilnehmerNameInput").focus();
+
+        }
+        return;
+    }
+    if (flag == "orderUnlock") {
+        if (orderFlag == false) {
+            altViewFlag = true;
+            currentView += 1;
+            showView(document.getElementById(schritte[currentView]));
+            specificViewChanges(currentView);
+
+            window.location = "#critJump";
+            document.getElementsByClassName("AlternativeInputs")[1].focus();
+
+        }
+        return;
+    }
+}
+
 /**
  * move to the previous view
  */
 function back() {
-    scrollToTop("stepsContainer");
 	if (!alternativeRatingViewFlag) {
 		hideView(schritteTeilnehmen[currentView]);
 		disableNavElement(schritteNavTeilnehmen[currentView]);

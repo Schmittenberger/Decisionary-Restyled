@@ -19,6 +19,15 @@ var minCriterias = 1;
 var maxCriterias = 15;
 var critCounter = 0;
 
+var showDelay = 1000// number of milliseconds to wait before showing next view
+//boolean flags for checking  if a view has been displayed
+var titleFlag = false;
+var altViewFlag = false;
+var critViewFlag = false;
+//for teilnehmen same flags
+var nameFlag = false;
+var orderFlag = false;
+
 var alternativesContainer = "alternativesContainer";
 var criteriasContainer = "criteriasContainer";
 
@@ -63,4 +72,14 @@ function specialCharacterDecode(object) {
 function scrollToTop(classNameDiv) {
     var myDiv = document.getElementsByClassName(classNameDiv)[0];
     myDiv.scrollTop = 0;
+}
+/**
+ * shows a view
+ * @param {any} DOM
+ */
+function showView(DOM) {
+    DOM.style.visibility = "visible";
+    DOM.style.display = "block";
+    setTimeout(function () { DOM.style.opacity = 1; }, 1);
+
 }

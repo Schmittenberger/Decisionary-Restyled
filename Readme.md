@@ -1,5 +1,5 @@
 # Decisionary-Restyled
-Decisionary is a NodeJS based decision finding webapp. This is a Restyle of the [original project](https://github.com/SchulzeAS/Decisionary)
+Decisionary is a Node.js based decision finding webapp. This is a simplistic and colorless Restyle of the [original project](https://github.com/SchulzeAS/Decisionary)
 
 # Information concerning this fork
 
@@ -28,7 +28,6 @@ Use **http://localhost:8000** for local access to the server.
 ## Documentation
 
 Documentation is done with [JSDoc](https://jsdoc.app/). 
-Die Dokumentation ist im Ordner mit dem gleichen Namen zu finden.
 Install JSDoc with the following command:
 ```
 npm install -g jsdoc

@@ -1,36 +1,36 @@
-# Decisionary
-Decisionary ist eine NodeJS basierte Entscheidungsfindungswebapplikation.
+# Decisionary-Restyled
+Decisionary is a NodeJS based decision finding webapp. This is a Restyle of the [original project](https://github.com/SchulzeAS/Decisionary)
 
-# Informationen zum Projekt
+# Information concerning this fork
 
-Um den Server zu starten muss der folgende Befehl im Verzeichnis mit der `index.js` ausgeführt werden.
+Start the server with the following command in the main folder
 ```
 node index.js --max-http-header-size 65536
 ```
-Der Server ist unter der Adresse in der config.js konfigurierten Variable "baseUrl" dann im Browser erreichbar.
+The server is reachable under the address configured in config.js.
 
-## Installierte npm Pakete
+## Installed npm modules
 
-Um alle erforderlichen Pakete zu installieren muss zuvor folgender Befehl ausgeführt werden.
+Run the following command to install all node moduls required for this project.
 ```
 npm ci
 ```
 
-- nodemon (Neustart des Servers bei Änderungen)
-- express (für Views)
-- pug (Template Engine für Express)
-- Browsersync (für Frontend Entwicklung) // startet mit "npm run ui" in neuer Konsole
+- nodemon 
+- express (for views)
+- pug (Template Engine for express)
+- Browsersync // start with "npm run ui" in a new console
 
-## Konfigurieren der URL
-Die URL kann in der Datei config.js ersetzt werden, sofern nicht unter **decisionary.ddns.net** gearbeitet werden soll.
-Wenn der Server nur lokal laufen soll, kann **http://localhost:8000** verwendet werden. Kein "/" am Ende der URL angeben.
+## Configure the URL
+Change the **baseUrl** variable in config.js to your liking. Do not add a trailing slash ("/") at the end.
+Use **http://localhost:8000** for local access to the server. 
 
-## Dokumentation der Skripte
+## Documentation
 
-Der Code ist mittels [JSDoc](https://jsdoc.app/) dokumentiert. 
-Die Dokumentation ist im Ordner mit dem gleichen Namen zu finden, **index.html** ist hierbei der Einstiegspunkt.
-Um JSDoc zu installieren muss lediglich folgender Befehl ausgeführt werde.
+Documentation is done with [JSDoc](https://jsdoc.app/). 
+Die Dokumentation ist im Ordner mit dem gleichen Namen zu finden.
+Install JSDoc with the following command:
 ```
 npm install -g jsdoc
 ```
-Führt man `jsdoc -r .` im root-Verzeichnis aus wird für alle JavaScript-Dateien eine HTML-Seite erstellt. In `./out/index.html` ist die Dokumentation zu finden.
+Run `jsdoc -r .` in the root folder. The documentation is outputed to `./out/index.html`.

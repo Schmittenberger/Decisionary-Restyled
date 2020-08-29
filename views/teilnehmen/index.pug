@@ -14,11 +14,10 @@ block layout-content
                 include Step2CriteriaOrder.pug
             div#step3Rating.Steps
                 include Step3Rating.pug
-            div#step4Overview.Steps
+            div#step4Overview.Steps(style='padding-top: 100px;')
                 include Step4OverviewTeilnehmen.pug
                     
-        img.navButton#navBack(onclick='back()' style='display:none').noselect
-        img.navButton#navNext(onclick='next()').noselect
+
 
     
     script(src="scripts/teilnehmen/critOrder.js" type="text/javascript")

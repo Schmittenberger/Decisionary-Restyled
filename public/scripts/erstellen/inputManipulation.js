@@ -5,6 +5,11 @@ document.getElementById('NameInput').addEventListener('keyup', function (event) 
     if (!titleFlag) setTimeout(function () { next("titleUnlock");}, showDelay);
 });
 
+document.getElementById('DescriptionInput').addEventListener('keyup', function (event) {
+    var descriptionSpan = document.getElementById("descriptionSpan");
+    currentPoll.description = descriptionSpan.innerHTML;
+});
+
 /**
  * adds a new input
  * @param {string} type name of the input type

@@ -69,3 +69,8 @@ input {
     width: 300px;
     margin-left: 5px;
 }
+#TeilnehmerNameInput {
+    height: 40px;
+    bottom:5px;
+    width: 300px;
+}

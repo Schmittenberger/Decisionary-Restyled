@@ -10,16 +10,21 @@
     visibility: hidden;
     z-index:10;
 }
-
+#navSend {
+    position: absolute;
+    right: 20px;
+    z-index: 10;
+}
 .removeBtn {
-    
-   /* position: relative;
+    /* position: relative;
     float: left;
     top: 7px;*/
 }
 
 .plusButtons {
-   
+    position: absolute;
+    right: 20px;
+    z-index: 10;
 }
 
 .inputContainer tr {

@@ -22,8 +22,9 @@ function next(flag) {
             currentView += 1;
             showView(document.getElementById(schritte[currentView]));
             specificViewChanges(currentView);
-            
+            //var focusedElement = document.activeElement;
             window.location = "#critJump";
+            //focusedElement.focus();
             document.getElementsByClassName("AlternativeInputs")[1].focus();
             
         }
@@ -35,8 +36,12 @@ function next(flag) {
             currentView += 1;
             showView(document.getElementById(schritte[currentView]));
             specificViewChanges(currentView); 
+            var focusedElement = document.activeElement;
+            //console.log(focusedElement);
             window.location = "#overJump";
-            document.getElementsByClassName("CriteriaInputs")[0].focus();
+            //console.log(focusedElement);
+            focusedElement.focus();
+            //document.getElementsByClassName("CriteriaInputs")[0].focus();
 
         }
         return;
@@ -54,9 +59,9 @@ function next(flag) {
             specificViewChanges(currentView);
             if (currentView == 4) { // sending the data to the server to create a poll
 
-                clearPoll();// fill poll object again just to be on the safe side
-                fillPoll();
-
+                //clearPoll();// fill poll object again just to be on the safe side
+                //fillPoll();
+                //console.log(currentPoll);
                 sendPoll();
                 sendEmptyResult();// send an empty vote to fill up the results file to show some empty data even before the first person has participated
                 iniliazeAggMatrix();
@@ -122,6 +127,7 @@ function assertViewReal() {
 
         showHints(startHint);
         window.location = "#TopicJump";
+        document.getElementById("NameInput").focus();
         return false;
     }
 

@@ -92,7 +92,7 @@ h3 {
     max-width: 1200px;
     min-width: 570px;
     min-height: 460px;
-   
+    top: 110px;
 }
 .auswertenScroll{
     overflow-y:auto;
@@ -151,6 +151,9 @@ img:hover{
 }
 .fivePadding{
     padding:5px;
+}
+.thirtyPaddingleft {
+    padding-left: 30px;
 }
 .noselect {
     -webkit-touch-callout: none; /* iOS Safari */

@@ -35,16 +35,17 @@ function specificViewChanges(curView) {
         case 1:	// current view is "Kriterien Reihenfolge"
             console.log("specific view 1");
 			if (!orderHintFlag) showHints(document.getElementById("orderHint"));
-			alternativeRatingViewFlag = false;
+            alternativeRatingViewFlag = false;
+            document.getElementById("navNext").style.visibility = "hidden";
 			break;
 		case 2: // current view is "Bewerten"
             alternativeRatingViewFlag = true;
             document.getElementById("curAlt").style.visibility = "visible";
 			break;
         case 3:	// current view is "Uebersicht"
-            document.getElementById("navNext").src = 'icons/senden_orange.svg';
-            document.getElementById("navNext").onclick = endOfTeilnehmen;
-            document.getElementById("navNext").style.borderRadius = "10px";
+            document.getElementById("navSend").src = 'icons/senden_orange.svg';
+            document.getElementById("navSend").onclick = endOfTeilnehmen;
+            document.getElementById("navSend").style.borderRadius = "10px";
 			overview();
 			addPencil();
 			makeNavClickable();
@@ -59,7 +60,9 @@ function specificViewChanges(curView) {
     document.getElementById("navBack").src = 'icons/Zuruck.svg';
     document.getElementById("navNext").src = 'icons/Weiter_grun.svg';
 }
+function send() {
 
+}
 /**
  * removes send button and clears current view to show link for the results
  * */
@@ -69,7 +72,11 @@ function endOfTeilnehmen() {
     sendAggMatrix()
     document.getElementById("navNext").remove();
     document.getElementById("navBack").remove();
+    document.getElementById("step1Name").remove();
+    document.getElementById("step2CriteriaOrder").remove();
+    document.getElementById("step3Rating").remove();
     document.getElementById("step4Overview").innerHTML = "";
+    document.getElementById("step4Overview").style.paddingTop = "10px";
     //document.getElementById("navigatorTop").innerHTML = "Vielen Dank für Ihre Teilnahme";
     document.getElementById("navigatorTop").innerHTML = "";
     var endSpan = document.createElement("span");
@@ -90,11 +97,19 @@ function endTable() {
     table.className = "innerPadding";
 
     var FirstRow = document.createElement("tr");
+    var SecondRow = document.createElement("tr");
     var cell = document.createElement("td");
+    var cellh4TD = document.createElement("td");
+    var cellh4 = document.createElement("h4");
+    var textnode3 = document.createTextNode("Vielen Dank für Ihre Teilnahme.");
+    cellh4.appendChild(textnode3);
+    cellh4TD.appendChild(cellh4);
     var textnode = document.createTextNode("Ihre Ergebnisse wurden erfolgreich gespeichert.");
     cell.appendChild(textnode);
-    FirstRow.appendChild(cell); // empty first cell in first row
+    FirstRow.appendChild(cellh4TD); // empty first cell in first row
     table.appendChild(FirstRow);
+    SecondRow.appendChild(cell); // empty first cell in first row
+    table.appendChild(SecondRow);
 
     var SecondRow = document.createElement("tr");
     var cell2 = document.createElement("td");

@@ -9,7 +9,7 @@ function overview() {
 
 	clearTable(document.getElementById("combinedTable"));
     var nameSpan = document.getElementById("nameSpan");
-    //currentPoll.title = document.getElementById('NameInput').value;
+    currentPoll.title = document.getElementById('NameInput').value;
     nameSpan.innerHTML = document.getElementById('NameInput').value;
     if (descriptionSpan.innerHTML == "") {
         descriptionSpan.innerHTML = " nicht vorhanden";
@@ -18,6 +18,7 @@ function overview() {
     else {
         descriptionSpan.innerHTML = " " + currentPoll.description;
         descriptionSpan.style.fontStyle = "normal";
+        currentPoll.description = descriptionSpan.innerHTML;
 
     }
     clearPoll();
@@ -42,6 +43,8 @@ function clearPoll() {
  * fill poll object with data from the inputs
  * */
 function fillPoll() {
+    //console.log(currentPoll);
+    currentPoll.title = document.getElementById('NameInput').value;
     alternativeInputs = document.getElementsByClassName("AlternativeInputs");
     criteriaInputs = document.getElementsByClassName("CriteriaInputs");
 

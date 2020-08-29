@@ -15,7 +15,7 @@ function next() {
 		if (currentView < schritteTeilnehmen.length - 1) {
 			currentView += 1;
 		} 
-		document.getElementById(schritteTeilnehmen[currentView]).style.visibility = "visible";
+        showView(document.getElementById(schritteTeilnehmen[currentView]));
 		//document.getElementById(schritteNavTeilnehmen[currentView]).style.backgroundColor = navActiveTeilnehmenColor;
 		specificViewChanges(currentView);
 		if (currentView == 2) { // reached the alternative ratings view where we will "fake" move next, but stay at current view
@@ -29,7 +29,7 @@ function next() {
                 alternativeRatingViewFlag = false;
 				next();
             } else {
-                scrollToTop("stepsContainer");
+                //scrollToTop("stepsContainer");
 				nextAlternative();
 			}
 		} else {
@@ -44,22 +44,25 @@ function unlockView(flag) {
             nameFlag = true;
             currentView += 1;
             showView(document.getElementById(schritteTeilnehmen[currentView]));
-
             specificViewChanges(currentView);
+            currentView += 1;
+            showView(document.getElementById(schritteTeilnehmen[currentView]));
+            specificViewChanges(currentView);
+            console.log("unlocked " + schritteTeilnehmen[currentView]);
             document.getElementById("TeilnehmerNameInput").focus();
 
         }
         return;
     }
     if (flag == "orderUnlock") {
+        console.log("order unlock");
         if (orderFlag == false) {
-            altViewFlag = true;
+            orderFlag = true;
             currentView += 1;
-            showView(document.getElementById(schritte[currentView]));
+            howView(document.getElementById(schritteTeilnehmen[currentView]));
             specificViewChanges(currentView);
 
             window.location = "#critJump";
-            document.getElementsByClassName("AlternativeInputs")[1].focus();
 
         }
         return;

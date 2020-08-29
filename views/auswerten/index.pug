@@ -2,26 +2,27 @@ extends ../layout
 
 block layout-content
     div#auswertenContainer
+        div#logo
         img(src='../icons/Logo.svg').logoImage.noselect
-        div.navigator#navigatorTop.navAuswerten(style='text-align:center')
-            div
-                h3#auswertenTitle.fivePadding
+        div.thirtyPaddingleft
+            div.navigator#navigatorTop.navAuswerten(style='display:none')
+            h3#auswertenTitle
                 
-        div.stepsContainerNoMaxHeight.auswertenScroll
-            span#legend Anzahl der Siege (Mehrere Sieger pro Person möglich)
-            canvas#summaryChart
-            //-span.fivePadding#mehrere 
-            //-a#link(download='filename.png') Save as Image
-            div
-                div.fivePadding
-                    h4#bisherige Bisherige Teilnehmer
-                    table#participantsTable
-                div.fivePadding#aggMatrixContainer
-                    div#aggSpoiler
-                        span(style="padding-right:5px")#aggToggle +
-                        h4.noselect(style='display:inline') Aggregationsmatrix
-                    img(onClick="hideHint('critHint')" src='../icons/Aufklappen.svg' style="padding-right:5px")#aggToggleArrow 
-                    table#aggTable
+            div.stepsContainerNoMaxHeight.auswertenScroll
+                span#legend Anzahl der Siege (Mehrere Sieger pro Person möglich)
+                canvas#summaryChart
+                //-span.fivePadding#mehrere 
+                //-a#link(download='filename.png') Save as Image
+                div
+                    div.fivePadding
+                        h4#bisherige Bisherige Teilnehmer
+                        table#participantsTable
+                    div.fivePadding#aggMatrixContainer
+                        div#aggSpoiler
+                            span(style="padding-right:5px")#aggToggle +
+                            h4.noselect(style='display:inline') Aggregationsmatrix
+                        img(onClick="hideHint('critHint')" src='../icons/Aufklappen.svg' style="padding-right:5px")#aggToggleArrow 
+                        table#aggTable
             div(style='padding-top:20px')#footer 
                 span 
     span#dada(style="visibility:hidden;z-index: -2;") #{uuid}

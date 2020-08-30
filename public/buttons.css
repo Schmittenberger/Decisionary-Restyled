@@ -6,7 +6,7 @@
 
 #navBack {
     position: absolute;
-    left: 20px;
+    left: -80px;
     visibility: hidden;
     z-index:10;
 }
@@ -23,7 +23,6 @@
 
 .plusButtons {
     position: absolute;
-    right: 20px;
     z-index: 10;
 }
 
@@ -154,4 +153,12 @@ button:hover {
 .linkTable{
     table-layout: fixed;
     border-collapse: collapse;
+}
+
+.PlusMinusButtonTd {
+    padding-left: 10px !important;
+    padding-top: 1px !important;
+}
+.plusButtomBt {
+    padding-left: 10px !important;
 }

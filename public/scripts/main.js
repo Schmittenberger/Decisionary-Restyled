@@ -27,6 +27,7 @@ var critViewFlag = false;
 //for teilnehmen same flags
 var nameFlag = false;
 var orderFlag = false;
+var resFlag = false;
 
 var alternativesContainer = "alternativesContainer";
 var criteriasContainer = "criteriasContainer";

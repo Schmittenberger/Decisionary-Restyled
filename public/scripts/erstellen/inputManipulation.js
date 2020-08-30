@@ -138,7 +138,7 @@ function updateSpanNumbers(span){
 	var spans = document.getElementsByClassName(span);
 	
 	for (let i = 0; i < spans.length; i++) {
-		spans[i].innerHTML = i+1;
+		spans[i].innerHTML = i+1 + ":";
 	}
 }
 
@@ -155,6 +155,7 @@ function createInput(type) {
     var inputTd = document.createElement('td');
     var newInput = document.createElement('input');
     var buttonTd = document.createElement('td');
+    
     var newInputDeleteBtn = document.createElement('img');
     newInputDeleteBtn.src = "icons/Minus.svg";
 	
@@ -167,6 +168,7 @@ function createInput(type) {
 		}
 		tempString = "Alternative";
         newInput.className = "AlternativeInputs";
+        
 		newInputRow.className = "Alternative";
 		newSpanNumber.className = "AlternativeSpanNumber";
         
@@ -248,6 +250,8 @@ function createInput(type) {
         }
     }
 
+    buttonTd.className = "PlusMinusButtonTd";
+    newInput.className += " w3-input";
     newInputDeleteBtn.className = "removeBtn plusMinusButtons noselect";
 	typeTextSpan.className +="inputH3";
     newSpanNumber.className += " SpanNumber";
@@ -261,7 +265,7 @@ function createInput(type) {
 
 	//newInput.addEventListener("input", onUpdateInput);
 	typeTextSpan.innerHTML = tempString;
-	newSpanNumber.innerHTML = (index+1);
+	newSpanNumber.innerHTML = (index+1) + ":";
 	//typeTextTd.appendChild(newSpanNumber);
     //typeTextTd.appendChild(newInput);
 

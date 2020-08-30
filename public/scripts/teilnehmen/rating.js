@@ -183,6 +183,16 @@ function nextAlternative() {
 function updateAlternativeHUD() {
     document.getElementById("curAlt").innerHTML = "(" + (currentAlternative + 1) + " / " + currentPoll.alternatives.length + ")";
     document.getElementById("currentAlternativeSpan").innerHTML = currentPoll.getAllAlternatives()[currentAlternative];
+    if (currentAlternative >= currentPoll.alternatives.length-1) {
+        document.getElementById("navNext").style.visibility = "hidden";
+    } else {
+        document.getElementById("navNext").style.visibility = "visible";
+    }
+    if (currentAlternative == 0) {
+        document.getElementById("navBack").style.visibility = "hidden";
+    } else {
+        document.getElementById("navBack").style.visibility = "visible";
+    }
     clearRatings();
     loadRatings();
     radioColoring();

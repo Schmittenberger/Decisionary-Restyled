@@ -19,10 +19,10 @@ function hideView(view) {
  * @param {int} curView index of the current view
  */
 function specificViewChanges(curView) {
-    document.getElementById("curAlt").style.visibility = "hidden";
+    //document.getElementById("curAlt").style.visibility = "hidden";
     //if (!clickViewBool) passiveNavHover();
-	document.getElementById("navBack").style.visibility = "visible";
-	document.getElementById("navNext").style.visibility = "visible";
+	//document.getElementById("navBack").style.visibility = "visible";
+	//document.getElementById("navNext").style.visibility = "visible";
     document.getElementById("navNext").onclick = next;
 	switch (curView) {
 		case 0: // current view is "name", we are at the beginning
@@ -35,8 +35,8 @@ function specificViewChanges(curView) {
         case 1:	// current view is "Kriterien Reihenfolge"
             console.log("specific view 1");
 			if (!orderHintFlag) showHints(document.getElementById("orderHint"));
-            alternativeRatingViewFlag = false;
-            document.getElementById("navNext").style.visibility = "hidden";
+            //alternativeRatingViewFlag = false;
+            //document.getElementById("navNext").style.visibility = "hidden";
 			break;
 		case 2: // current view is "Bewerten"
             alternativeRatingViewFlag = true;
@@ -47,10 +47,10 @@ function specificViewChanges(curView) {
             document.getElementById("navSend").onclick = endOfTeilnehmen;
             document.getElementById("navSend").style.borderRadius = "10px";
 			overview();
-			addPencil();
-			makeNavClickable();
-			addMouseHover();
-			alternativeRatingViewFlag = false;
+			//addPencil();
+			//makeNavClickable();
+			//addMouseHover();
+			//alternativeRatingViewFlag = false;
 			return;
 			break;
 		default:
@@ -67,27 +67,39 @@ function send() {
  * removes send button and clears current view to show link for the results
  * */
 function endOfTeilnehmen() {
-    scrollToTop("stepsContainer");
-    sendData();
-    sendAggMatrix()
-    document.getElementById("navNext").remove();
-    document.getElementById("navBack").remove();
-    document.getElementById("step1Name").remove();
-    document.getElementById("step2CriteriaOrder").remove();
-    document.getElementById("step3Rating").remove();
-    document.getElementById("step4Overview").innerHTML = "";
-    document.getElementById("step4Overview").style.paddingTop = "10px";
-    //document.getElementById("navigatorTop").innerHTML = "Vielen Dank für Ihre Teilnahme";
-    document.getElementById("navigatorTop").innerHTML = "";
-    var endSpan = document.createElement("span");
-    endSpan.className = "endSpan";
-    endSpan.innerHTML = "Vielen Dank für Ihre Teilnahme";
-    document.getElementById("navigatorTop").appendChild(endSpan);
-   
-    //console.log("called clear teilnehmen");
-    var t = endTable();
-    //console.log(t);
-    document.getElementById("step4Overview").appendChild(t);
+    //scrollToTop("stepsContainer");
+    var nI = document.getElementById("TeilnehmerNameInput");
+    if (nI.value != "") {
+        unHighlightInput(nI);
+        sendData();
+        sendAggMatrix()
+        document.getElementById("navNext").remove();
+        document.getElementById("navBack").remove();
+        document.getElementById("step1Name").remove();
+        document.getElementById("step2CriteriaOrder").remove();
+        document.getElementById("step3Rating").remove();
+        document.getElementById("step4Overview").innerHTML = "";
+        document.getElementById("step4Overview").style.paddingTop = "10px";
+        //document.getElementById("navigatorTop").innerHTML = "Vielen Dank für Ihre Teilnahme";
+        document.getElementById("navigatorTop").innerHTML = "";
+        var endSpan = document.createElement("span");
+        endSpan.className = "endSpan";
+        endSpan.innerHTML = "Vielen Dank für Ihre Teilnahme";
+        document.getElementById("navigatorTop").appendChild(endSpan);
+
+        //console.log("called clear teilnehmen");
+        var t = endTable();
+        //console.log(t);
+        document.getElementById("step4Overview").appendChild(t);
+    } else {
+        showHints(document.getElementById("nameHint"));
+        window.location = "#nameJump";
+        highlightInput(nI);
+        nI.placeholder = "Bitte Ihren Namen eingeben";
+        nI.focus();
+        //nI.style.border = 
+        console.log("enter name");
+    }
 }
 /**
  * after clicking send in the last step remove nav buttons and show an encouraging message

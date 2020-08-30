@@ -3,11 +3,12 @@
     font-size: 40px;
 }
 
-.NameInputH3 input {
-    height: 40px;
-    bottom: 5px;
-    width: 300px;
-}
+    .NameInputH3 input {
+        height: 40px;
+        bottom: 5px;
+        width: 300px;
+        display: inline;
+    }
 
 .DescriptionInputH3 {
     margin-top: 20px;

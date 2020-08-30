@@ -4,11 +4,13 @@ document.getElementById('TeilnehmerNameInput').addEventListener('keyup', functio
     if (!nameFlag) setTimeout(function () { unlockView("nameUnlock"); }, showDelay);
 });
 
+
+
 /**
  * move to the next view
  */
 function next() {
-    
+    console.log("next " + currentAlternative+1);
     if (!alternativeRatingViewFlag && assertView()) {
 		//hideView(schritteTeilnehmen[currentView]);
 		//disableNavElement(schritteNavTeilnehmen[currentView]);
@@ -25,9 +27,14 @@ function next() {
         currentAlternativeAssertClicked == false;
 		//console.log("inside alternatives and they are:" + validateAllInputsAlternative());
 		if (validateAllInputsAlternative()) {
-			if (currentAlternative >= currentPoll.alternatives.length-1) { // leaving rating view
-                alternativeRatingViewFlag = false;
-				next();
+			if (currentAlternative >= currentPoll.alternatives.length-2) { // leaving rating view
+                //alternativeRatingViewFlag = false;
+                //next();
+                nextAlternative();
+                console.log("unlocking res");
+                unlockView("resUnlock");
+                
+
             } else {
                 //scrollToTop("stepsContainer");
 				nextAlternative();
@@ -50,6 +57,7 @@ function unlockView(flag) {
             specificViewChanges(currentView);
             console.log("unlocked " + schritteTeilnehmen[currentView]);
             document.getElementById("TeilnehmerNameInput").focus();
+            calculateBtHeight();
 
         }
         return;
@@ -59,11 +67,21 @@ function unlockView(flag) {
         if (orderFlag == false) {
             orderFlag = true;
             currentView += 1;
-            howView(document.getElementById(schritteTeilnehmen[currentView]));
+            showView(document.getElementById(schritteTeilnehmen[currentView]));
             specificViewChanges(currentView);
 
             window.location = "#critJump";
 
+        }
+        return;
+    }
+    if (flag == "resUnlock") {
+        if (resFlag == false) {
+            resFlag = true;
+            currentView += 1;
+            showView(document.getElementById(schritteTeilnehmen[currentView]));
+            specificViewChanges(currentView);
+            window.location = "#resJump";
         }
         return;
     }
@@ -91,8 +109,8 @@ function back() {
 		rateHint = document.getElementById("rateHint");
 		hideHints(rateHint);
 		if (currentAlternative <= 0) {
-            alternativeRatingViewFlag = false;
-			back();
+            //alternativeRatingViewFlag = false;
+			//back();
 		} else {
 			backAlternative();
         }
@@ -134,4 +152,9 @@ function assertView() {
 			return true;
 	}
 	return true;
+}
+function calculateBtHeight() {
+    var h = document.getElementById("alternativeRatingTable").offsetHeight;
+    document.getElementById("navBack").style.bottom = '' + ((h / 2) - 50) + "px";
+    document.getElementById("navNext").style.bottom = '' + ((h / 2) - 50) + "px";
 }

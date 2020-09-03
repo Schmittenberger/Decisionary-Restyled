@@ -8,7 +8,7 @@ block layout-content
                     td 
                         h2 Teilnehmen Link: 	
                     td(style="width:69%")
-                        input#InputTeilnehmen.linkInput(readonly value="example.org")
+                        input#InputTeilnehmen.linkInput(readonly value="example.org").w3-input
                     td.tooltip
                         img.noselect.copyButton#copyButtonTeilnehmen(onclick="copyLink('InputTeilnehmen','copyTooltipTeilnehmen')" onmouseout="toolTipMouseOut('copyTooltipTeilnehmen')" src="icons/Kopie.svg") 
                         span.tooltiptext#copyTooltipTeilnehmen Link kopieren
@@ -23,7 +23,7 @@ block layout-content
                     td
                         h2 Ergebnisse Link: 
                     td(style="width:69%")
-                        input#InputAuswerten.linkInput(readonly value="example.org/example")
+                        input#InputAuswerten.linkInput(readonly value="example.org/example").w3-input
                     td.tooltip
                         img.noselect.copyButton#copyButtonAuswerten(onclick="copyLink('InputAuswerten','copyTooltipAuswerten')" onmouseout="toolTipMouseOut('copyTooltipAuswerten')" src="icons/Kopie.svg")
                         span.tooltiptext#copyTooltipAuswerten Link kopieren

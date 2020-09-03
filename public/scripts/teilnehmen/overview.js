@@ -26,6 +26,7 @@ function overview() {
 
     highlightDecidingCriteria(result.decidingIndex, "teilnehmenTable", tableBackgroundColor, lighterNavActiveTeilnehmenColor);
     boldResult(result);
+    $("#firstTdFirstRowTeilnehmen").css("background-color", "#e6e6e6");
 
 
 
@@ -138,7 +139,7 @@ function highlightDecidingCriteria(index, tableId, defaultColor,highlightColor) 
     }
 
     if (index >= 0) { // catch -1 aka undecisive
-        rows[index + 1].style.backgroundColor = highlightColor;
+        rows[index + 1].style.backgroundColor = highlightDecisiveSwitch();
     }
 }
 

@@ -168,3 +168,10 @@ button:hover {
 .plusButtomBt {
     padding-left: 10px !important;
 }
+#nightmode {
+    position: fixed;
+    top: 40px;
+    right:60px;
+    background-color: white;
+    z-index: 15;
+}

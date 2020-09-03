@@ -9,6 +9,7 @@ block layout-content
         div.stepsContainer
             a#TopicJump.jump
             img(src='icons/Logo.svg').logoImage.noselect
+            button#nightmode(onclick='modeSwitch()') nightmode
             div.topStepPadding
                 span.invisible --
             div#step1Topic.Steps(style='display:block;opacity:1')
@@ -38,6 +39,7 @@ block layout-content
     script(src="scripts/erstellen/inputManipulation.js")
     script(src="scripts/styling.js")
     script(src="scripts/shake.js")
+    script(src="scripts/nightmode.js")
     script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js")
 
 

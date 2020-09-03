@@ -20,10 +20,10 @@ function activeInput(e){
 	for(var i = 0; i < inputs.length; i++) {
 		if(inputs[i].type.toLowerCase() == 'text') {
 			//alert(inputs[i].value);
-			inputs[i].style.backgroundColor = "white";
+            inputs[i].style.backgroundColor = inputSwitch();
 		}
 	}
-	e.target.style.backgroundColor = "#f3f3f3";
+    e.target.style.backgroundColor = inputHighlightSwitch();
 }
 
 /**
@@ -31,5 +31,5 @@ function activeInput(e){
  * @param {DOMElement} e element to remove highlighting from
  */
 function unactiveInput(e){
-	e.target.style.backgroundColor = "white";
+    e.target.style.backgroundColor = inputHighlightSwitch();
 }

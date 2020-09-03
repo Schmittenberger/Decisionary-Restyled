@@ -29,6 +29,9 @@ var nameFlag = false;
 var orderFlag = false;
 var resFlag = false;
 
+
+var teilnehmenFlag = false;
+
 var alternativesContainer = "alternativesContainer";
 var criteriasContainer = "criteriasContainer";
 

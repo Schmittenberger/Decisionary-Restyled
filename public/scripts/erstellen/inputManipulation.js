@@ -53,7 +53,8 @@ function addInput(type) {
 			}
 
 			
-		}
+        }
+        switchInputs();
 	}
 	else {
 		console.log("invalid type for adding input");
@@ -163,7 +164,7 @@ function createInput(type) {
     var buttonTd = document.createElement('td');
     
     var newInputDeleteBtn = document.createElement('img');
-    newInputDeleteBtn.src = "icons/Minus.svg";
+    newInputDeleteBtn.src = plusMinusModeSwitch("minus");
 	
 	var index;
 

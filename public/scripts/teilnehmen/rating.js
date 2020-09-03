@@ -129,7 +129,7 @@ function recolorAfterRatingIfMarked() {
     rLabels = document.getElementsByClassName("radioLabel");
     for (i = 0; i < rLabels.length; i++) {
         //rLabels[0].style.outline = "inital";
-        rLabels[i].style.color = "black";
+        rLabels[i].style.color = ratingReturnSwitch();
     }
     unvalidatedViewAlternative();
 }
@@ -145,7 +145,7 @@ function validateAllInputsAlternative() {
     rLabels = document.getElementsByClassName("radioLabel");
     for (i = 0; i < rLabels.length; i++) {
         //rLabels[0].style.outline = "inital";
-        rLabels[i].style.color = "black";
+        rLabels[i].style.color = ratingReturnSwitch();
     }
     res = true;
     for (i = 0; i < currentPoll.criterias.length; i++) {
@@ -225,8 +225,8 @@ function radioChangeState(thisRadio, parent) {
     // it is actually always true but checking anyway
     if (thisRadio.checked == true) {
 
-        parent.style.backgroundColor = activeRadioColor;
-        parent.parentElement.style.backgroundColor = activeRadioColor;
+        parent.style.backgroundColor = activeRatingSwitch();
+        parent.parentElement.style.backgroundColor = activeRatingSwitch();
     }
     passiveRadioColoring();
 }
@@ -237,7 +237,7 @@ function radioChangeState(thisRadio, parent) {
  */
 function ratingLabelHoverIn(elem) {
     //elem.style.backgroundColor = hoverRadioColor // - irgendein wert, ein wenig transparenters;
-    elem.style.backgroundColor = hoverRadioColor 
+    elem.style.backgroundColor = hoverRatingSwitch(); 
 }
 /**
  * inverse to ratingLabelHoverIn
@@ -245,8 +245,8 @@ function ratingLabelHoverIn(elem) {
  * @param {boolean} state true or false
  */
 function ratingLabelHoverOut(elem,state) {
-    if (state == true) elem.style.backgroundColor = activeRadioColor;
-    if (state == false) elem.style.backgroundColor = passiveRadioColor;
+    if (state == true) elem.style.backgroundColor = activeHoverSwitch();
+    if (state == false) elem.style.backgroundColor = passivHoverSwitch();
 }
 /**
  * changes background color of cells in the rating table when click
@@ -256,10 +256,10 @@ function radioColoring() {
     for (i = 0; i < inputs.length; i++) {
         if (inputs[i].checked == false) {
             //inputs[i].parentElement.style.backgroundColor = passiveRadioColor;
-            inputs[i].parentElement.parentElement.style.backgroundColor = passiveRadioColor;
+            inputs[i].parentElement.parentElement.style.backgroundColor = passivHoverSwitch();
         } else {
             //inputs[i].parentElement.style.backgroundColor = activeRadioColor;
-            inputs[i].parentElement.parentElement.style.backgroundColor = activeRadioColor; // color the cell not just the input
+            inputs[i].parentElement.parentElement.style.backgroundColor = activeHoverSwitch();// color the cell not just the input
         }
     }
     

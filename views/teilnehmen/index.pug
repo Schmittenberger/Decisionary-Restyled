@@ -3,6 +3,7 @@ block layout-content
     div#creationContainer
         div#logo
         img(src='icons/Logo.svg').logoImage.noselect
+        button#nightmode(onclick='modeSwitch()') nightmode
         div.navigator#navigatorTop(style="display:none")
             include navigator.pug
         div.stepsContainer
@@ -29,6 +30,7 @@ block layout-content
     script(src="scripts/dataProcessing.js")
     script(src="scripts/identifier.js")
     script(src="scripts/main.js")
+    script(src="scripts/nightmode.js")
     script(src="scripts/teilnehmen/navigation.js")
     script(src="scripts/navigationGeneral.js")
     script(src="scripts/teilnehmen/overview.js")

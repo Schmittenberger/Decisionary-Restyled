@@ -6,6 +6,7 @@ tempPoll.addCriteria("Verfügbarkeit");
 //tempPoll.addCriteria("Geschmack");
 //tempPoll.addCriteria("Laune");
 
+teilnehmenFlag = true;
 
 jayson = document.getElementById("eidi").innerHTML;
 jayson = specialCharacterDecode(jayson);

@@ -1,0 +1,22 @@
+<svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" inkscape:version="1.0 (4035a4fb49, 2020-05-01)" sodipodi:docname="Minus.svg" version="1.1" height="299.00002" width="299.00002" style="isolation:isolate"><rect id="backgroundrect" width="100%" height="100%" x="0" y="0" fill="none" stroke="none"/>
+  <metadata id="metadata450">
+    <rdf:RDF>
+      <cc:Work rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview inkscape:current-layer="svg446" inkscape:window-maximized="0" inkscape:window-y="0" inkscape:window-x="0" inkscape:cy="142.66666" inkscape:cx="199.33333" inkscape:zoom="0.83276367" showgrid="false" id="namedview448" inkscape:window-height="480" inkscape:window-width="705" inkscape:pageshadow="2" inkscape:pageopacity="0" guidetolerance="10" gridtolerance="10" objecttolerance="10" borderopacity="1" bordercolor="#666666" pagecolor="#ffffff"/>
+  <defs id="defs434">
+    <clipPath id="a">
+      <path id="path431" d="M 0,0 H 1024 V 768 H 0 Z"/>
+    </clipPath>
+  </defs>
+  
+<g class="currentLayer" style=""><title>Layer 1</title><g id="g444" clip-path="url(#a)" class="selected" fill="#ffffff" fill-opacity="1">
+    <path id="path436" fill="#ffffff" fill-rule="evenodd" d="M0,149.5 C0,66.98899999999998 66.98899999999998,0 149.5,0 C232.01099999999997,0 299,66.98899999999998 299,149.5 C299,232.01100000000002 232.01099999999997,299 149.5,299 C66.98899999999998,299 0,232.01100000000002 0,149.5 zm28,0 C28,82.44200000000001 82.44200000000001,28 149.5,28 C216.558,28 271,82.44200000000001 271,149.5 C271,216.558 216.558,271 149.5,271 C82.44200000000001,271 28,216.558 28,149.5 z" fill-opacity="1"/>
+    <path id="path438" fill-rule="evenodd" d="M0,149.5 C0,66.98899999999998 66.98899999999998,0 149.5,0 C232.01099999999997,0 299,66.98899999999998 299,149.5 C299,232.01100000000002 232.01099999999997,299 149.5,299 C66.98899999999998,299 0,232.01100000000002 0,149.5 zm28,0 C28,82.44200000000001 82.44200000000001,28 149.5,28 C216.558,28 271,82.44200000000001 271,149.5 C271,216.558 216.558,271 149.5,271 C82.44200000000001,271 28,216.558 28,149.5 z" fill="#ffffff" fill-opacity="1"/>
+    <path id="path440" d="m233.36,138.995 l-0.42300000000000004,23.54 l-167.599,-2.515 l0.42400000000000004,-23.538 z" fill="#ffffff" fill-opacity="1"/>
+    <path id="path442" d="m233.36,138.995 l-0.42300000000000004,23.54 l-167.599,-2.515 l0.42400000000000004,-23.538 z" fill="#ffffff" fill-opacity="1"/>
+  </g></g></svg>

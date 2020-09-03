@@ -4,6 +4,7 @@ block layout-content
     div#auswertenContainer
         div#logo
         img(src='../icons/Logo.svg').logoImage.noselect
+        button#nightmode(onclick='modeSwitch()') nightmode
         div.thirtyPaddingleft
             div.navigator#navigatorTop.navAuswerten(style='display:none')
             h3#auswertenTitle
@@ -33,6 +34,8 @@ block layout-content
     script(src="../scripts/poll.js")
     script(src="../scripts/criteria.js")
     script(src="../scripts/main.js")
+    script(src="../scripts/nightmode.js")
+    script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js")
     
     
 

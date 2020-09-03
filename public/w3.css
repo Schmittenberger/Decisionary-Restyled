@@ -48,7 +48,7 @@ hr{border:0;border-top:1px solid #eee;margin:20px 0}
     padding: 8px;
     border: none;
     border-bottom: 1px solid #3D3D3D;
-    width: 100%
+    width: 100%;
 }
 .w3-select{padding:9px 0;width:100%;border:none;border-bottom:1px solid #ccc}
 .w3-dropdown-click,.w3-dropdown-hover{position:relative;display:inline-block;cursor:pointer}

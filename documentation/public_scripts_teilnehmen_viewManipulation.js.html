@@ -47,36 +47,38 @@ function hideView(view) {
  * @param {int} curView index of the current view
  */
 function specificViewChanges(curView) {
-    document.getElementById("curAlt").style.visibility = "hidden";
-    if (!clickViewBool) passiveNavHover();
-	document.getElementById("navBack").style.visibility = "visible";
-	document.getElementById("navNext").style.visibility = "visible";
+    //document.getElementById("curAlt").style.visibility = "hidden";
+    //if (!clickViewBool) passiveNavHover();
+	//document.getElementById("navBack").style.visibility = "visible";
+	//document.getElementById("navNext").style.visibility = "visible";
     document.getElementById("navNext").onclick = next;
 	switch (curView) {
 		case 0: // current view is "name", we are at the beginning
-			document.getElementById("navBack").style.visibility = "hidden";
-            document.getElementById("navNext").src = 'icons/teilnehmen_blau.svg';
+			//document.getElementById("navBack").style.visibility = "hidden";
+            //document.getElementById("navNext").src = 'icons/teilnehmen_blau.svg';
 			updateAlternativeHUD();
 			alternativeRatingViewFlag = false;
 			return;
 			break;
-		case 1:	// current view is "Kriterien Reihenfolge"
+        case 1:	// current view is "Kriterien Reihenfolge"
+            console.log("specific view 1");
 			if (!orderHintFlag) showHints(document.getElementById("orderHint"));
-			alternativeRatingViewFlag = false;
+            //alternativeRatingViewFlag = false;
+            //document.getElementById("navNext").style.visibility = "hidden";
 			break;
 		case 2: // current view is "Bewerten"
             alternativeRatingViewFlag = true;
             document.getElementById("curAlt").style.visibility = "visible";
 			break;
         case 3:	// current view is "Uebersicht"
-            document.getElementById("navNext").src = 'icons/senden_orange.svg';
-            document.getElementById("navNext").onclick = endOfTeilnehmen;
-            document.getElementById("navNext").style.borderRadius = "10px";
+            document.getElementById("navSend").src = 'icons/senden_orange.svg';
+            document.getElementById("navSend").onclick = endOfTeilnehmen;
+            document.getElementById("navSend").style.borderRadius = "10px";
 			overview();
-			addPencil();
-			makeNavClickable();
-			addMouseHover();
-			alternativeRatingViewFlag = false;
+			//addPencil();
+			//makeNavClickable();
+			//addMouseHover();
+			//alternativeRatingViewFlag = false;
 			return;
 			break;
 		default:
@@ -86,28 +88,46 @@ function specificViewChanges(curView) {
     document.getElementById("navBack").src = 'icons/Zuruck.svg';
     document.getElementById("navNext").src = 'icons/Weiter_grun.svg';
 }
+function send() {
 
+}
 /**
  * removes send button and clears current view to show link for the results
  * */
 function endOfTeilnehmen() {
-    scrollToTop("stepsContainer");
-    sendData();
-    sendAggMatrix()
-    document.getElementById("navNext").remove();
-    document.getElementById("navBack").remove();
-    document.getElementById("step4Overview").innerHTML = "";
-    //document.getElementById("navigatorTop").innerHTML = "Vielen Dank für Ihre Teilnahme";
-    document.getElementById("navigatorTop").innerHTML = "";
-    var endSpan = document.createElement("span");
-    endSpan.className = "endSpan";
-    endSpan.innerHTML = "Vielen Dank für Ihre Teilnahme";
-    document.getElementById("navigatorTop").appendChild(endSpan);
-   
-    //console.log("called clear teilnehmen");
-    var t = endTable();
-    //console.log(t);
-    document.getElementById("step4Overview").appendChild(t);
+    //scrollToTop("stepsContainer");
+    var nI = document.getElementById("TeilnehmerNameInput");
+    if (nI.value != "") {
+        unHighlightInput(nI);
+        sendData();
+        sendAggMatrix()
+        document.getElementById("navNext").remove();
+        document.getElementById("navBack").remove();
+        document.getElementById("step1Name").remove();
+        document.getElementById("step2CriteriaOrder").remove();
+        document.getElementById("step3Rating").remove();
+        document.getElementById("step4Overview").innerHTML = "";
+        document.getElementById("step4Overview").style.paddingTop = "10px";
+        //document.getElementById("navigatorTop").innerHTML = "Vielen Dank für Ihre Teilnahme";
+        document.getElementById("navigatorTop").innerHTML = "";
+        var endSpan = document.createElement("span");
+        endSpan.className = "endSpan";
+        endSpan.innerHTML = "Vielen Dank für Ihre Teilnahme";
+        document.getElementById("navigatorTop").appendChild(endSpan);
+
+        //console.log("called clear teilnehmen");
+        var t = endTable();
+        //console.log(t);
+        document.getElementById("step4Overview").appendChild(t);
+    } else {
+        showHints(document.getElementById("nameHint"));
+        window.location = "#nameJump";
+        highlightInput(nI);
+        nI.placeholder = "Bitte Ihren Namen eingeben";
+        nI.focus();
+        //nI.style.border = 
+        console.log("enter name");
+    }
 }
 /**
  * after clicking send in the last step remove nav buttons and show an encouraging message
@@ -117,11 +137,19 @@ function endTable() {
     table.className = "innerPadding";
 
     var FirstRow = document.createElement("tr");
+    var SecondRow = document.createElement("tr");
     var cell = document.createElement("td");
+    var cellh4TD = document.createElement("td");
+    var cellh4 = document.createElement("h4");
+    var textnode3 = document.createTextNode("Vielen Dank für Ihre Teilnahme.");
+    cellh4.appendChild(textnode3);
+    cellh4TD.appendChild(cellh4);
     var textnode = document.createTextNode("Ihre Ergebnisse wurden erfolgreich gespeichert.");
     cell.appendChild(textnode);
-    FirstRow.appendChild(cell); // empty first cell in first row
+    FirstRow.appendChild(cellh4TD); // empty first cell in first row
     table.appendChild(FirstRow);
+    SecondRow.appendChild(cell); // empty first cell in first row
+    table.appendChild(SecondRow);
 
     var SecondRow = document.createElement("tr");
     var cell2 = document.createElement("td");
@@ -262,13 +290,13 @@ function addMouseHover(){
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Criteria.html">Criteria</a></li><li><a href="Poll.html">Poll</a></li><li><a href="Sortable.html">Sortable</a></li></ul><h3>Global</h3><ul><li><a href="global.html#activeInput">activeInput</a></li><li><a href="global.html#addInput">addInput</a></li><li><a href="global.html#addMouseHover">addMouseHover</a></li><li><a href="global.html#addPencil">addPencil</a></li><li><a href="global.html#afterCritOrder">afterCritOrder</a></li><li><a href="global.html#aggMatrixVote">aggMatrixVote</a></li><li><a href="global.html#altSafeguard">altSafeguard</a></li><li><a href="global.html#app">app</a></li><li><a href="global.html#assertView">assertView</a></li><li><a href="global.html#back">back</a></li><li><a href="global.html#backAlternative">backAlternative</a></li><li><a href="global.html#boldResult">boldResult</a></li><li><a href="global.html#clearPoll">clearPoll</a></li><li><a href="global.html#clearRatings">clearRatings</a></li><li><a href="global.html#clearTable">clearTable</a></li><li><a href="global.html#clickToChangeView">clickToChangeView</a></li><li><a href="global.html#copyLink">copyLink</a></li><li><a href="global.html#createInput">createInput</a></li><li><a href="global.html#createTable">createTable</a></li><li><a href="global.html#createTableOverview">createTableOverview</a></li><li><a href="global.html#createTableRating">createTableRating</a></li><li><a href="global.html#createUuid">createUuid</a></li><li><a href="global.html#debugRandomRate">debugRandomRate</a></li><li><a href="global.html#decodeObject">decodeObject</a></li><li><a href="global.html#disableNavElement">disableNavElement</a></li><li><a href="global.html#endOfTeilnehmen">endOfTeilnehmen</a></li><li><a href="global.html#endTable">endTable</a></li><li><a href="global.html#express">express</a></li><li><a href="global.html#fillParticipants">fillParticipants</a></li><li><a href="global.html#fillPoll">fillPoll</a></li><li><a href="global.html#fillWelcomeAltTable">fillWelcomeAltTable</a></li><li><a href="global.html#findOldIndex">findOldIndex</a></li><li><a href="global.html#getPoll">getPoll</a></li><li><a href="global.html#hideBtn">hideBtn</a></li><li><a href="global.html#hideHint">hideHint</a></li><li><a href="global.html#hideHintALT">hideHintALT</a></li><li><a href="global.html#hideHints">hideHints</a></li><li><a href="global.html#hideView">hideView</a></li><li><a href="global.html#highlightDecidingCriteria">highlightDecidingCriteria</a></li><li><a href="global.html#highlightInput">highlightInput</a></li><li><a href="global.html#highlightRadio">highlightRadio</a></li><li><a href="global.html#loadCriterias">loadCriterias</a></li><li><a href="global.html#loadPoll">loadPoll</a></li><li><a href="global.html#loadRatings">loadRatings</a></li><li><a href="global.html#makeNavClickable">makeNavClickable</a></li><li><a href="global.html#makeNavUnclickable">makeNavUnclickable</a></li><li><a href="global.html#modifyData">modifyData</a></li><li><a href="global.html#next">next</a></li><li><a href="global.html#nextAlternative">nextAlternative</a></li><li><a href="global.html#onUpdateInput">onUpdateInput</a></li><li><a href="global.html#overview">overview</a></li><li><a href="global.html#passiveNavHover">passiveNavHover</a></li><li><a href="global.html#prepareAlternatives">prepareAlternatives</a></li><li><a href="global.html#radioChangeState">radioChangeState</a></li><li><a href="global.html#radioColoring">radioColoring</a></li><li><a href="global.html#rateAlternative">rateAlternative</a></li><li><a href="global.html#ratingLabelHoverIn">ratingLabelHoverIn</a></li><li><a href="global.html#ratingLabelHoverOut">ratingLabelHoverOut</a></li><li><a href="global.html#rearrangedCrits">rearrangedCrits</a></li><li><a href="global.html#recolorAfterRatingIfMarked">recolorAfterRatingIfMarked</a></li><li><a href="global.html#removeDuplicateCharacters">removeDuplicateCharacters</a></li><li><a href="global.html#removeParent">removeParent</a></li><li><a href="global.html#removePencil">removePencil</a></li><li><a href="global.html#removeSpecificInput">removeSpecificInput</a></li><li><a href="global.html#savePoll">savePoll</a></li><li><a href="global.html#saveVote">saveVote</a></li><li><a href="global.html#scrollToTop">scrollToTop</a></li><li><a href="global.html#sendAggMatrix">sendAggMatrix</a></li><li><a href="global.html#sendData">sendData</a></li><li><a href="global.html#sendEmptyResult">sendEmptyResult</a></li><li><a href="global.html#showBtn">showBtn</a></li><li><a href="global.html#showHints">showHints</a></li><li><a href="global.html#sortString">sortString</a></li><li><a href="global.html#specialCharacterDecode">specialCharacterDecode</a></li><li><a href="global.html#specialCharacterEncode">specialCharacterEncode</a></li><li><a href="global.html#specificViewChanges">specificViewChanges</a></li><li><a href="global.html#toggleMatrix">toggleMatrix</a></li><li><a href="global.html#toolTipMouseOut">toolTipMouseOut</a></li><li><a href="global.html#unactiveInput">unactiveInput</a></li><li><a href="global.html#unHighlightInput">unHighlightInput</a></li><li><a href="global.html#unHighlightRadio">unHighlightRadio</a></li><li><a href="global.html#unvalidatedViewAlternative">unvalidatedViewAlternative</a></li><li><a href="global.html#updateAlternativeHUD">updateAlternativeHUD</a></li><li><a href="global.html#updateSpanNumbers">updateSpanNumbers</a></li><li><a href="global.html#validateAllInputsAlternative">validateAllInputsAlternative</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Criteria.html">Criteria</a></li><li><a href="Poll.html">Poll</a></li><li><a href="Sortable.html">Sortable</a></li></ul><h3>Global</h3><ul><li><a href="global.html#activeInput">activeInput</a></li><li><a href="global.html#addInput">addInput</a></li><li><a href="global.html#addMouseHover">addMouseHover</a></li><li><a href="global.html#addPencil">addPencil</a></li><li><a href="global.html#afterCritOrder">afterCritOrder</a></li><li><a href="global.html#aggMatrixVote">aggMatrixVote</a></li><li><a href="global.html#altSafeguard">altSafeguard</a></li><li><a href="global.html#app">app</a></li><li><a href="global.html#assertView">assertView</a></li><li><a href="global.html#back">back</a></li><li><a href="global.html#backAlternative">backAlternative</a></li><li><a href="global.html#boldResult">boldResult</a></li><li><a href="global.html#clearPoll">clearPoll</a></li><li><a href="global.html#clearRatings">clearRatings</a></li><li><a href="global.html#clearTable">clearTable</a></li><li><a href="global.html#clickToChangeView">clickToChangeView</a></li><li><a href="global.html#copyLink">copyLink</a></li><li><a href="global.html#createInput">createInput</a></li><li><a href="global.html#createTable">createTable</a></li><li><a href="global.html#createTableOverview">createTableOverview</a></li><li><a href="global.html#createTableRating">createTableRating</a></li><li><a href="global.html#createUuid">createUuid</a></li><li><a href="global.html#debugRandomRate">debugRandomRate</a></li><li><a href="global.html#decodeObject">decodeObject</a></li><li><a href="global.html#disableNavElement">disableNavElement</a></li><li><a href="global.html#endOfTeilnehmen">endOfTeilnehmen</a></li><li><a href="global.html#endTable">endTable</a></li><li><a href="global.html#express">express</a></li><li><a href="global.html#fillParticipants">fillParticipants</a></li><li><a href="global.html#fillPoll">fillPoll</a></li><li><a href="global.html#fillWelcomeAltTable">fillWelcomeAltTable</a></li><li><a href="global.html#findOldIndex">findOldIndex</a></li><li><a href="global.html#getPoll">getPoll</a></li><li><a href="global.html#hideBtn">hideBtn</a></li><li><a href="global.html#hideHint">hideHint</a></li><li><a href="global.html#hideHintALT">hideHintALT</a></li><li><a href="global.html#hideHints">hideHints</a></li><li><a href="global.html#hideView">hideView</a></li><li><a href="global.html#highlightDecidingCriteria">highlightDecidingCriteria</a></li><li><a href="global.html#highlightInput">highlightInput</a></li><li><a href="global.html#highlightRadio">highlightRadio</a></li><li><a href="global.html#loadCriterias">loadCriterias</a></li><li><a href="global.html#loadPoll">loadPoll</a></li><li><a href="global.html#loadRatings">loadRatings</a></li><li><a href="global.html#makeNavClickable">makeNavClickable</a></li><li><a href="global.html#makeNavUnclickable">makeNavUnclickable</a></li><li><a href="global.html#modifyData">modifyData</a></li><li><a href="global.html#next">next</a></li><li><a href="global.html#nextAlternative">nextAlternative</a></li><li><a href="global.html#onUpdateInput">onUpdateInput</a></li><li><a href="global.html#overview">overview</a></li><li><a href="global.html#passiveNavHover">passiveNavHover</a></li><li><a href="global.html#prepareAlternatives">prepareAlternatives</a></li><li><a href="global.html#radioChangeState">radioChangeState</a></li><li><a href="global.html#radioColoring">radioColoring</a></li><li><a href="global.html#rateAlternative">rateAlternative</a></li><li><a href="global.html#ratingLabelHoverIn">ratingLabelHoverIn</a></li><li><a href="global.html#ratingLabelHoverOut">ratingLabelHoverOut</a></li><li><a href="global.html#rearrangedCrits">rearrangedCrits</a></li><li><a href="global.html#recolorAfterRatingIfMarked">recolorAfterRatingIfMarked</a></li><li><a href="global.html#removeDuplicateCharacters">removeDuplicateCharacters</a></li><li><a href="global.html#removeParent">removeParent</a></li><li><a href="global.html#removePencil">removePencil</a></li><li><a href="global.html#removeSpecificInput">removeSpecificInput</a></li><li><a href="global.html#savePoll">savePoll</a></li><li><a href="global.html#saveVote">saveVote</a></li><li><a href="global.html#scrollToTop">scrollToTop</a></li><li><a href="global.html#sendAggMatrix">sendAggMatrix</a></li><li><a href="global.html#sendData">sendData</a></li><li><a href="global.html#sendEmptyResult">sendEmptyResult</a></li><li><a href="global.html#showBtn">showBtn</a></li><li><a href="global.html#showHints">showHints</a></li><li><a href="global.html#showView">showView</a></li><li><a href="global.html#sortString">sortString</a></li><li><a href="global.html#specialCharacterDecode">specialCharacterDecode</a></li><li><a href="global.html#specialCharacterEncode">specialCharacterEncode</a></li><li><a href="global.html#specificViewChanges">specificViewChanges</a></li><li><a href="global.html#toggleMatrix">toggleMatrix</a></li><li><a href="global.html#toolTipMouseOut">toolTipMouseOut</a></li><li><a href="global.html#unactiveInput">unactiveInput</a></li><li><a href="global.html#unHighlightInput">unHighlightInput</a></li><li><a href="global.html#unHighlightRadio">unHighlightRadio</a></li><li><a href="global.html#unvalidatedViewAlternative">unvalidatedViewAlternative</a></li><li><a href="global.html#updateAlternativeHUD">updateAlternativeHUD</a></li><li><a href="global.html#updatedTitle">updatedTitle</a></li><li><a href="global.html#updateSpanNumbers">updateSpanNumbers</a></li><li><a href="global.html#validateAllInputsAlternative">validateAllInputsAlternative</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Fri Aug 28 2020 12:31:07 GMT+0200 (Central European Summer Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Thu Sep 03 2020 14:32:55 GMT+0200 (Central European Summer Time)
 </footer>
 
 <script> prettyPrint(); </script>

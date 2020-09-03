@@ -28,6 +28,22 @@
         <article>
             <pre class="prettyprint source linenums"><code>var originalBtnPos; // save the original position of the add input button
 
+document.getElementById('NameInput').addEventListener('keyup', function (event) {
+    
+    //updatedTitle();
+    if (!titleFlag) {
+        modifyData(0);
+        setTimeout(function () { next("titleUnlock"); }, showDelay);
+    }
+});
+
+document.getElementById('DescriptionInput').addEventListener('keyup', function (event) {
+    updateDesc();
+});
+function updateDesc() {
+    var descriptionSpan = document.getElementById("DescriptionInput");
+    currentPoll.description = descriptionSpan.value;
+}
 /**
  * adds a new input
  * @param {string} type name of the input type
@@ -156,7 +172,7 @@ function updateSpanNumbers(span){
 	var spans = document.getElementsByClassName(span);
 	
 	for (let i = 0; i &lt; spans.length; i++) {
-		spans[i].innerHTML = i+1;
+		spans[i].innerHTML = i+1 + ":";
 	}
 }
 
@@ -173,6 +189,7 @@ function createInput(type) {
     var inputTd = document.createElement('td');
     var newInput = document.createElement('input');
     var buttonTd = document.createElement('td');
+    
     var newInputDeleteBtn = document.createElement('img');
     newInputDeleteBtn.src = "icons/Minus.svg";
 	
@@ -185,6 +202,7 @@ function createInput(type) {
 		}
 		tempString = "Alternative";
         newInput.className = "AlternativeInputs";
+        
 		newInputRow.className = "Alternative";
 		newSpanNumber.className = "AlternativeSpanNumber";
         
@@ -210,7 +228,14 @@ function createInput(type) {
                 if (emptyInput == false)addInput("Alt");
             }
         });
-
+        newInput.addEventListener('keyup', function (event) {
+            overview();
+        });
+        if (altCounter == 2) {
+            newInput.addEventListener('keydown', function (event) {
+                if (!altViewFlag) setTimeout(function () { next("altUnlock"); }, showDelay);
+            });
+        }
 		if (altCounter >= maxAlternatives) {
 			hideBtn(document.getElementById("addAlternativeButton"));
 		}
@@ -244,12 +269,23 @@ function createInput(type) {
                 if (emptyInput == false) addInput("Crit");
             }
         });
+        newInput.addEventListener('keyup', function (event) {
+            overview();
+        });
+        if (critCounter == 1) {
+            newInput.addEventListener('keydown', function (event) {
+                
+                if (!critViewFlag) setTimeout(function () { next("critUnlock"); }, showDelay);
+            });
+        }
 
 		if (critCounter >= maxCriterias) {
 			hideBtn(document.getElementById("addCriteriaButton"));
         }
     }
 
+    buttonTd.className = "PlusMinusButtonTd";
+    newInput.className += " w3-input";
     newInputDeleteBtn.className = "removeBtn plusMinusButtons noselect";
 	typeTextSpan.className +="inputH3";
     newSpanNumber.className += " SpanNumber";
@@ -263,7 +299,7 @@ function createInput(type) {
 
 	//newInput.addEventListener("input", onUpdateInput);
 	typeTextSpan.innerHTML = tempString;
-	newSpanNumber.innerHTML = (index+1);
+	newSpanNumber.innerHTML = (index+1) + ":";
 	//typeTextTd.appendChild(newSpanNumber);
     //typeTextTd.appendChild(newInput);
 
@@ -338,13 +374,13 @@ function onUpdateInput(e) {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Criteria.html">Criteria</a></li><li><a href="Poll.html">Poll</a></li><li><a href="Sortable.html">Sortable</a></li></ul><h3>Global</h3><ul><li><a href="global.html#activeInput">activeInput</a></li><li><a href="global.html#addInput">addInput</a></li><li><a href="global.html#addMouseHover">addMouseHover</a></li><li><a href="global.html#addPencil">addPencil</a></li><li><a href="global.html#afterCritOrder">afterCritOrder</a></li><li><a href="global.html#aggMatrixVote">aggMatrixVote</a></li><li><a href="global.html#altSafeguard">altSafeguard</a></li><li><a href="global.html#app">app</a></li><li><a href="global.html#assertView">assertView</a></li><li><a href="global.html#back">back</a></li><li><a href="global.html#backAlternative">backAlternative</a></li><li><a href="global.html#boldResult">boldResult</a></li><li><a href="global.html#clearPoll">clearPoll</a></li><li><a href="global.html#clearRatings">clearRatings</a></li><li><a href="global.html#clearTable">clearTable</a></li><li><a href="global.html#clickToChangeView">clickToChangeView</a></li><li><a href="global.html#copyLink">copyLink</a></li><li><a href="global.html#createInput">createInput</a></li><li><a href="global.html#createTable">createTable</a></li><li><a href="global.html#createTableOverview">createTableOverview</a></li><li><a href="global.html#createTableRating">createTableRating</a></li><li><a href="global.html#createUuid">createUuid</a></li><li><a href="global.html#debugRandomRate">debugRandomRate</a></li><li><a href="global.html#decodeObject">decodeObject</a></li><li><a href="global.html#disableNavElement">disableNavElement</a></li><li><a href="global.html#endOfTeilnehmen">endOfTeilnehmen</a></li><li><a href="global.html#endTable">endTable</a></li><li><a href="global.html#express">express</a></li><li><a href="global.html#fillParticipants">fillParticipants</a></li><li><a href="global.html#fillPoll">fillPoll</a></li><li><a href="global.html#fillWelcomeAltTable">fillWelcomeAltTable</a></li><li><a href="global.html#findOldIndex">findOldIndex</a></li><li><a href="global.html#getPoll">getPoll</a></li><li><a href="global.html#hideBtn">hideBtn</a></li><li><a href="global.html#hideHint">hideHint</a></li><li><a href="global.html#hideHintALT">hideHintALT</a></li><li><a href="global.html#hideHints">hideHints</a></li><li><a href="global.html#hideView">hideView</a></li><li><a href="global.html#highlightDecidingCriteria">highlightDecidingCriteria</a></li><li><a href="global.html#highlightInput">highlightInput</a></li><li><a href="global.html#highlightRadio">highlightRadio</a></li><li><a href="global.html#loadCriterias">loadCriterias</a></li><li><a href="global.html#loadPoll">loadPoll</a></li><li><a href="global.html#loadRatings">loadRatings</a></li><li><a href="global.html#makeNavClickable">makeNavClickable</a></li><li><a href="global.html#makeNavUnclickable">makeNavUnclickable</a></li><li><a href="global.html#modifyData">modifyData</a></li><li><a href="global.html#next">next</a></li><li><a href="global.html#nextAlternative">nextAlternative</a></li><li><a href="global.html#onUpdateInput">onUpdateInput</a></li><li><a href="global.html#overview">overview</a></li><li><a href="global.html#passiveNavHover">passiveNavHover</a></li><li><a href="global.html#prepareAlternatives">prepareAlternatives</a></li><li><a href="global.html#radioChangeState">radioChangeState</a></li><li><a href="global.html#radioColoring">radioColoring</a></li><li><a href="global.html#rateAlternative">rateAlternative</a></li><li><a href="global.html#ratingLabelHoverIn">ratingLabelHoverIn</a></li><li><a href="global.html#ratingLabelHoverOut">ratingLabelHoverOut</a></li><li><a href="global.html#rearrangedCrits">rearrangedCrits</a></li><li><a href="global.html#recolorAfterRatingIfMarked">recolorAfterRatingIfMarked</a></li><li><a href="global.html#removeDuplicateCharacters">removeDuplicateCharacters</a></li><li><a href="global.html#removeParent">removeParent</a></li><li><a href="global.html#removePencil">removePencil</a></li><li><a href="global.html#removeSpecificInput">removeSpecificInput</a></li><li><a href="global.html#savePoll">savePoll</a></li><li><a href="global.html#saveVote">saveVote</a></li><li><a href="global.html#scrollToTop">scrollToTop</a></li><li><a href="global.html#sendAggMatrix">sendAggMatrix</a></li><li><a href="global.html#sendData">sendData</a></li><li><a href="global.html#sendEmptyResult">sendEmptyResult</a></li><li><a href="global.html#showBtn">showBtn</a></li><li><a href="global.html#showHints">showHints</a></li><li><a href="global.html#sortString">sortString</a></li><li><a href="global.html#specialCharacterDecode">specialCharacterDecode</a></li><li><a href="global.html#specialCharacterEncode">specialCharacterEncode</a></li><li><a href="global.html#specificViewChanges">specificViewChanges</a></li><li><a href="global.html#toggleMatrix">toggleMatrix</a></li><li><a href="global.html#toolTipMouseOut">toolTipMouseOut</a></li><li><a href="global.html#unactiveInput">unactiveInput</a></li><li><a href="global.html#unHighlightInput">unHighlightInput</a></li><li><a href="global.html#unHighlightRadio">unHighlightRadio</a></li><li><a href="global.html#unvalidatedViewAlternative">unvalidatedViewAlternative</a></li><li><a href="global.html#updateAlternativeHUD">updateAlternativeHUD</a></li><li><a href="global.html#updateSpanNumbers">updateSpanNumbers</a></li><li><a href="global.html#validateAllInputsAlternative">validateAllInputsAlternative</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Criteria.html">Criteria</a></li><li><a href="Poll.html">Poll</a></li><li><a href="Sortable.html">Sortable</a></li></ul><h3>Global</h3><ul><li><a href="global.html#activeInput">activeInput</a></li><li><a href="global.html#addInput">addInput</a></li><li><a href="global.html#addMouseHover">addMouseHover</a></li><li><a href="global.html#addPencil">addPencil</a></li><li><a href="global.html#afterCritOrder">afterCritOrder</a></li><li><a href="global.html#aggMatrixVote">aggMatrixVote</a></li><li><a href="global.html#altSafeguard">altSafeguard</a></li><li><a href="global.html#app">app</a></li><li><a href="global.html#assertView">assertView</a></li><li><a href="global.html#back">back</a></li><li><a href="global.html#backAlternative">backAlternative</a></li><li><a href="global.html#boldResult">boldResult</a></li><li><a href="global.html#clearPoll">clearPoll</a></li><li><a href="global.html#clearRatings">clearRatings</a></li><li><a href="global.html#clearTable">clearTable</a></li><li><a href="global.html#clickToChangeView">clickToChangeView</a></li><li><a href="global.html#copyLink">copyLink</a></li><li><a href="global.html#createInput">createInput</a></li><li><a href="global.html#createTable">createTable</a></li><li><a href="global.html#createTableOverview">createTableOverview</a></li><li><a href="global.html#createTableRating">createTableRating</a></li><li><a href="global.html#createUuid">createUuid</a></li><li><a href="global.html#debugRandomRate">debugRandomRate</a></li><li><a href="global.html#decodeObject">decodeObject</a></li><li><a href="global.html#disableNavElement">disableNavElement</a></li><li><a href="global.html#endOfTeilnehmen">endOfTeilnehmen</a></li><li><a href="global.html#endTable">endTable</a></li><li><a href="global.html#express">express</a></li><li><a href="global.html#fillParticipants">fillParticipants</a></li><li><a href="global.html#fillPoll">fillPoll</a></li><li><a href="global.html#fillWelcomeAltTable">fillWelcomeAltTable</a></li><li><a href="global.html#findOldIndex">findOldIndex</a></li><li><a href="global.html#getPoll">getPoll</a></li><li><a href="global.html#hideBtn">hideBtn</a></li><li><a href="global.html#hideHint">hideHint</a></li><li><a href="global.html#hideHintALT">hideHintALT</a></li><li><a href="global.html#hideHints">hideHints</a></li><li><a href="global.html#hideView">hideView</a></li><li><a href="global.html#highlightDecidingCriteria">highlightDecidingCriteria</a></li><li><a href="global.html#highlightInput">highlightInput</a></li><li><a href="global.html#highlightRadio">highlightRadio</a></li><li><a href="global.html#loadCriterias">loadCriterias</a></li><li><a href="global.html#loadPoll">loadPoll</a></li><li><a href="global.html#loadRatings">loadRatings</a></li><li><a href="global.html#makeNavClickable">makeNavClickable</a></li><li><a href="global.html#makeNavUnclickable">makeNavUnclickable</a></li><li><a href="global.html#modifyData">modifyData</a></li><li><a href="global.html#next">next</a></li><li><a href="global.html#nextAlternative">nextAlternative</a></li><li><a href="global.html#onUpdateInput">onUpdateInput</a></li><li><a href="global.html#overview">overview</a></li><li><a href="global.html#passiveNavHover">passiveNavHover</a></li><li><a href="global.html#prepareAlternatives">prepareAlternatives</a></li><li><a href="global.html#radioChangeState">radioChangeState</a></li><li><a href="global.html#radioColoring">radioColoring</a></li><li><a href="global.html#rateAlternative">rateAlternative</a></li><li><a href="global.html#ratingLabelHoverIn">ratingLabelHoverIn</a></li><li><a href="global.html#ratingLabelHoverOut">ratingLabelHoverOut</a></li><li><a href="global.html#rearrangedCrits">rearrangedCrits</a></li><li><a href="global.html#recolorAfterRatingIfMarked">recolorAfterRatingIfMarked</a></li><li><a href="global.html#removeDuplicateCharacters">removeDuplicateCharacters</a></li><li><a href="global.html#removeParent">removeParent</a></li><li><a href="global.html#removePencil">removePencil</a></li><li><a href="global.html#removeSpecificInput">removeSpecificInput</a></li><li><a href="global.html#savePoll">savePoll</a></li><li><a href="global.html#saveVote">saveVote</a></li><li><a href="global.html#scrollToTop">scrollToTop</a></li><li><a href="global.html#sendAggMatrix">sendAggMatrix</a></li><li><a href="global.html#sendData">sendData</a></li><li><a href="global.html#sendEmptyResult">sendEmptyResult</a></li><li><a href="global.html#showBtn">showBtn</a></li><li><a href="global.html#showHints">showHints</a></li><li><a href="global.html#showView">showView</a></li><li><a href="global.html#sortString">sortString</a></li><li><a href="global.html#specialCharacterDecode">specialCharacterDecode</a></li><li><a href="global.html#specialCharacterEncode">specialCharacterEncode</a></li><li><a href="global.html#specificViewChanges">specificViewChanges</a></li><li><a href="global.html#toggleMatrix">toggleMatrix</a></li><li><a href="global.html#toolTipMouseOut">toolTipMouseOut</a></li><li><a href="global.html#unactiveInput">unactiveInput</a></li><li><a href="global.html#unHighlightInput">unHighlightInput</a></li><li><a href="global.html#unHighlightRadio">unHighlightRadio</a></li><li><a href="global.html#unvalidatedViewAlternative">unvalidatedViewAlternative</a></li><li><a href="global.html#updateAlternativeHUD">updateAlternativeHUD</a></li><li><a href="global.html#updatedTitle">updatedTitle</a></li><li><a href="global.html#updateSpanNumbers">updateSpanNumbers</a></li><li><a href="global.html#validateAllInputsAlternative">validateAllInputsAlternative</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Fri Aug 28 2020 12:31:07 GMT+0200 (Central European Summer Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Thu Sep 03 2020 14:32:55 GMT+0200 (Central European Summer Time)
 </footer>
 
 <script> prettyPrint(); </script>

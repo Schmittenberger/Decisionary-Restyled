@@ -1,15 +1,21 @@
 var originalBtnPos; // save the original position of the add input button
 
 document.getElementById('NameInput').addEventListener('keyup', function (event) {
-    updatedTitle();
-    if (!titleFlag) setTimeout(function () { next("titleUnlock");}, showDelay);
+    
+    //updatedTitle();
+    if (!titleFlag) {
+        modifyData(0);
+        setTimeout(function () { next("titleUnlock"); }, showDelay);
+    }
 });
 
 document.getElementById('DescriptionInput').addEventListener('keyup', function (event) {
-    var descriptionSpan = document.getElementById("descriptionSpan");
-    currentPoll.description = descriptionSpan.innerHTML;
+    updateDesc();
 });
-
+function updateDesc() {
+    var descriptionSpan = document.getElementById("DescriptionInput");
+    currentPoll.description = descriptionSpan.value;
+}
 /**
  * adds a new input
  * @param {string} type name of the input type

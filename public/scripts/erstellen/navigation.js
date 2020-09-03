@@ -2,6 +2,8 @@
  * move to the next view
  */
 
+
+
 function next(flag) {
     if (flag == "titleUnlock") {
         if (titleFlag == false) {
@@ -11,7 +13,7 @@ function next(flag) {
 
             specificViewChanges(currentView);
             document.getElementById("NameInput").focus();
-            modifyData(0);
+           
             
         }
         return;
@@ -62,6 +64,7 @@ function next(flag) {
                 //clearPoll();// fill poll object again just to be on the safe side
                 //fillPoll();
                 //console.log(currentPoll);
+                //updateDesc();
                 sendPoll();
                 sendEmptyResult();// send an empty vote to fill up the results file to show some empty data even before the first person has participated
                 iniliazeAggMatrix();

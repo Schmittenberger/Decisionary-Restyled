@@ -1,5 +1,5 @@
 # Decisionary-Restyled
-Decisionary is a Node.js based decision finding webapp. This is a minimalistic and colorless restyle of the [original project](https://github.com/SchulzeAS/Decisionary)
+Decisionary is a Node.js based decision finding webapp. This is a minimalistic, colorless and one-page restyle of the [original project](https://github.com/SchulzeAS/Decisionary).
 
 # Information concerning this fork
 

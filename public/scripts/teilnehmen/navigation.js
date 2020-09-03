@@ -10,7 +10,7 @@ document.getElementById('TeilnehmerNameInput').addEventListener('keyup', functio
  * move to the next view
  */
 function next() {
-    console.log("next " + currentAlternative+1);
+    //console.log("next " + currentAlternative+1);
     if (!alternativeRatingViewFlag && assertView()) {
 		//hideView(schritteTeilnehmen[currentView]);
 		//disableNavElement(schritteNavTeilnehmen[currentView]);
@@ -31,8 +31,8 @@ function next() {
                 //alternativeRatingViewFlag = false;
                 //next();
                 nextAlternative();
-                console.log("unlocking res");
-                unlockView("resUnlock");
+                //console.log("unlocking res");
+                //unlockView("resUnlock");
                 
 
             } else {
@@ -52,25 +52,24 @@ function unlockView(flag) {
             currentView += 1;
             showView(document.getElementById(schritteTeilnehmen[currentView]));
             specificViewChanges(currentView);
-            currentView += 1;
-            showView(document.getElementById(schritteTeilnehmen[currentView]));
-            specificViewChanges(currentView);
-            console.log("unlocked " + schritteTeilnehmen[currentView]);
+
+            //console.log("unlocked " + schritteTeilnehmen[currentView]);
             document.getElementById("TeilnehmerNameInput").focus();
-            calculateBtHeight();
+            
 
         }
         return;
     }
     if (flag == "orderUnlock") {
-        console.log("order unlock");
+        //console.log("order unlock");
         if (orderFlag == false) {
             orderFlag = true;
             currentView += 1;
             showView(document.getElementById(schritteTeilnehmen[currentView]));
             specificViewChanges(currentView);
-
+            calculateBtHeight();
             window.location = "#critJump";
+            document.getElementById("navOrderNext").remove();
 
         }
         return;

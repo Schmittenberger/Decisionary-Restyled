@@ -40,8 +40,8 @@ function loadCriterias(critArray, divId)
             dragClass: "sortable-drag",  // Class name for the dragging item
             //direction: 'vertical', // Direction of Sortable (will be detected automatically if not given)
             onEnd: function (/**Event*/evt) {
-                var itemEl = evt.item;  // dragged HTMLElement
-                itemEl.draggable = true; // work on this
+                //var itemEl = evt.item;  // dragged HTMLElement
+                //itemEl.draggable = true; // work on this
 
                 rearrangedCrits();
             },
@@ -54,6 +54,8 @@ function loadCriterias(critArray, divId)
  * */
 function rearrangedCrits()
 {
+
+
     critNumbers = document.getElementsByClassName("critSpanNumber");
 
     for (var i = 0; i < critNumbers.length; i++)
@@ -90,6 +92,10 @@ function rearrangedCrits()
  * */
 function afterCritOrder()
 {
+    if (resFlag) {
+        //console.log("rearranged new eval");
+        overview();
+    }
     document.getElementById("alternativeRatingTable").innerHTML = "";
     createTableRating(currentPoll.getAllCriterias(), ratingNamesWords, "alternativeRatingTable", lighterNavActiveTeilnehmenColor);
     updateAlternativeHUD();

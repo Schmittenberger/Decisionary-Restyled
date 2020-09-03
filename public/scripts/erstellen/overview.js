@@ -26,7 +26,10 @@ function overview() {
 
 	createTableOverview(currentPoll.getAllAlternatives(), currentPoll.getAllCriterias());
 }
-
+/**
+ * updates the title on the overview page
+ * not used anymore because overview page was removed
+ * */
 function updatedTitle(){
     var nameSpan = document.getElementById("nameSpan");
     nameSpan.innerHTML = document.getElementById('NameInput').value;

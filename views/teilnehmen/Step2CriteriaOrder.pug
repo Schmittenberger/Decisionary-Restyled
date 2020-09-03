@@ -2,9 +2,11 @@ block layout-content
     div.w3-row.hundredHeight
         div.w3-col.l10.s10
             div.innerPadding
+
                 h1 Kriterien
-                span(style='display:block')#CritH3changeable Bitte legen Sie Ihre persönliche Kriterienreihenfolge anhand Ihrer Prioritäten fest.
+                span(style='display:block')#CritH3changeable Bitte legen Sie Ihre persönliche Kriterienreihenfolge mit Drag-and-drop anhand Ihrer Prioritäten fest.
                 div#critOrder
+            img.navButton#navOrderNext(onclick='unlockView("orderUnlock")' style='visibility:visible;bottom: -90px;' src='icons/Weiter_grun.svg').noselect
         div.w3-col.l2.s2.hundredHeight
                 div.hint#orderHint(style='display:none') 
                     h4 Info

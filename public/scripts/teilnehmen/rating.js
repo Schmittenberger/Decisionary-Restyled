@@ -40,6 +40,13 @@ function createTableRating(critArray, ratingNamesWords, tableId) {
             newInput.onclick = function () {
                 //alert(this.name + "" + this.getAttribute('data-rating'));
                 rateAlternative(this.name, this.getAttribute('data-rating'));
+                if (resFlag) {
+                    console.log("rerate after res");
+                    overview();
+                }
+                if (currentAlternative == currentPoll.alternatives.length - 1) {
+                    lastAltRatedUnlock();
+                }
             };
             newInput.onchange= function () {
                 radioColoring();
@@ -256,4 +263,16 @@ function radioColoring() {
         }
     }
     
+}
+
+function lastAltRatedUnlock() {
+    var res = true;
+    for (i = 0; i < currentPoll.criterias.length; i++) {
+        if (currentPoll.criterias[i].values[currentPoll.alternatives.length-1] == null) {
+            res = false;
+        }
+    }
+    if (res) {
+        unlockView("resUnlock");
+    }
 }

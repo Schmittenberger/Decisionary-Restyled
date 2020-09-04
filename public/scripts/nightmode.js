@@ -2,6 +2,8 @@ var initialInputBackgroundColor;
 var initialbackgroundColor;
 var initalTextColor;
 
+
+
 var nightmodeFlag = false;
 /**
  * supposed to save inital colors for reverting to, 
@@ -20,13 +22,15 @@ function setInitalColors() {
 function modeSwitch() {
     
     if (!nightmodeFlag) {
-        console.log("switching to night mode");
+        //console.log("switching to night mode");
         nightmodeFlag = true;
+        $("#nightmode").html("daymode");
         nightmode();
     }
     else {
-        console.log("switching to day mode");
+        //console.log("switching to day mode");
         nightmodeFlag = false;
+        $("#nightmode").html("nightmode");
         daymode();
     }
     switchCritOrderSpan();
@@ -34,7 +38,9 @@ function modeSwitch() {
     if (teilnehmenFlag == true) {
         updateAlternativeHUD();
         ratingResultTableSwitch();
+        if (resFlag) highlightDecidingCriteria(currentPoll.evaluate().decidingIndex, "teilnehmenTable");
     }
+
 }
 
 /*
@@ -64,9 +70,18 @@ function nightmode() {
 
     $("i").css({ "color": "white" }); 
 
-    if (teilnehmenFlag == true) {
+    if (teilnehmenFlag) {
         highlightDecidingCriteria(result.decidingIndex, "teilnehmenTable", "#212121", "green");
+    }       
+
+    if (auswertenFlag) {
+        $("#aggTable td").css({ "border": "1px solid white" }); 
+        var ctx = document.getElementById("summaryChart").getContext("2d");
+        var mybarchart = new Chart(ctx, configNight);
+
+        mybarchart.update();
     }
+
     switchMinusBts();
     //document.styleSheets.
 }
@@ -90,9 +105,20 @@ function daymode() {
 
     $("i").css({ "color": "black" }); 
 
-    if (teilnehmenFlag == true) {
+    //$("table").css({ "border": "1px solid red" }); 
+
+    if (teilnehmenFlag) {
         highlightDecidingCriteria(result.decidingIndex, "teilnehmenTable", "white", lighterNavActiveTeilnehmenColor);
     }
+
+    if (auswertenFlag) {
+        $("#aggTable td").css({ "border": "1px solid black" });
+        var ctx = document.getElementById("summaryChart").getContext("2d");
+        var mybarchart = new Chart(ctx, config);
+
+        mybarchart.update();
+    }
+
 
     switchMinusBts();
 }
@@ -278,4 +304,15 @@ function ratingResultTableSwitch() {
 function highlightDecisiveSwitch() {
     if (nightmodeFlag) return "green";
     else return lighterNavActiveTeilnehmenColor;
+}
+//Note: the color of the table is already changed with ratingResultTableSwitch()
+// this function is just to complete the set
+function tableBackgroundSwitch() { 
+    if (nightmodeFlag) return "#212121";
+    else return "white";
+}
+
+function barChartSwitch() {
+    if (nightmodeFlag) return "white"
+    else return "black";
 }

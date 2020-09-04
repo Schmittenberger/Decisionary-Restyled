@@ -1,7 +1,6 @@
-
+auswertenFlag = true;
 document.getElementsByClassName("navAuswerten")[0].style.backgroundColor = navAuswertenColor;
 //console.log(document.getElementsByClassName("navAuswerten")[0]);
-
 var ctx = document.getElementById("summaryChart").getContext("2d");
 var data = new SummaryData();
 var jayson = document.getElementById("dada").innerHTML;
@@ -30,32 +29,34 @@ var cont = JSON.parse(jayson);
     else
         document.getElementById("auswertenTitle").innerHTML = "";
 
+    //console.log(cont);
 
-
-
-//console.log(cont);
-
-var casts = [];
-for (var ob in cont.alternatives){
-  casts[cont.alternatives[ob]] = 0;
-}
-for (let i = 0; i < cont.votes.length; i++) {
-    data.addParticipant(cont.votes[i].name);
-  for(let j = 0; j < cont.votes[i].winner.length; j++){
-    if(typeof(casts[cont.votes[i].winner[j]]) === 'undefined'){
-      casts[cont.votes[i].winner[j]] = 0;
+    var casts = [];
+    for (var ob in cont.alternatives){
+      casts[cont.alternatives[ob]] = 0;
     }
-    casts[cont.votes[i].winner[j]] = (casts[cont.votes[i].winner[j]]) + 1;
+    for (let i = 0; i < cont.votes.length; i++) {
+        data.addParticipant(cont.votes[i].name);
+      for(let j = 0; j < cont.votes[i].winner.length; j++){
+        if(typeof(casts[cont.votes[i].winner[j]]) === 'undefined'){
+          casts[cont.votes[i].winner[j]] = 0;
+        }
+        casts[cont.votes[i].winner[j]] = (casts[cont.votes[i].winner[j]]) + 1;
 
-  }
+      }
+    }
 }
-}
+
+
 //console.log(casts);
 Object.keys(casts).forEach((item, i) => {
 //console.log(" Item:" + item + "   cont:" + casts[item]);
 data.addVote(item, casts[item]);
 });
 
+function updateChart() {
+    mybarchart.update();
+}
 
 
 fillParticipants("participantsTable", data.participants);
@@ -177,8 +178,8 @@ function toggleMatrix() {
         y.innerHTML = "+";
     }
 }
-// created the bar graph showing the poll results
-var myChart = new Chart(ctx, {
+
+window.configNight = {
     type: "bar",
     data: {
         labels: data.getLabels(),
@@ -227,26 +228,128 @@ var myChart = new Chart(ctx, {
             display: false,//we are manually adding the axis labels with html
             labels: {
                 boxWidth: 0,
-                boxHeight:0,
-                fontSize: 15, 
+                boxHeight: 0,
+                fontSize: 15,
 
                 //fontColor:'#FFFFFF'
             },
         },
         scales: {
             yAxes: [{
+                gridLines: {
+                    zeroLineColor: 'white',
+                    color: '#454545'
+                },
                 ticks: {
                     beginAtZero: true,
                     stepSize: 1,
-                    suggestedMax: 2
+                    suggestedMax: 2,
+                    fontColor: "white"
                 },
                 scaleLabel: {
                     display: false, //we are manually adding the axis labels with html
                     labelString: 'Anzahl der Siege (Mehrere Sieger pro Person möglich)'
                 }
+            }],
+            xAxes: [{
+                gridLines: {
+                    zeroLineColor: 'white',
+                    color:'#454545'
+                },
+                ticks: {
+                    fontColor: "white"
+                },
             }]
         }
     }
-});
+};
 
+
+    // created the bar graph showing the poll results
+
+    window.config = {
+        type: "bar",
+        data: {
+            labels: data.getLabels(),
+            datasets: [{
+                label: "Anzahl der Siege (Mehrere Sieger pro Person möglich)",
+                data: data.getAmounts(),
+                backgroundColor: [
+                    "rgba(255, 99, 132, 0.2)",
+                    "rgba(54, 162, 235, 0.2)",
+                    "rgba(255, 206, 86, 0.2)",
+                    "rgba(75, 192, 192, 0.2)",
+                    "rgba(153, 102, 255, 0.2)",
+                    "rgba(255, 99, 132, 0.2)",
+                    "rgba(54, 162, 235, 0.2)",
+                    "rgba(255, 206, 86, 0.2)",
+                    "rgba(75, 192, 192, 0.2)",
+                    "rgba(153, 102, 255, 0.2)",
+                    "rgba(255, 99, 132, 0.2)",
+                    "rgba(54, 162, 235, 0.2)",
+                    "rgba(255, 206, 86, 0.2)",
+                    "rgba(75, 192, 192, 0.2)",
+                    "rgba(153, 102, 255, 0.2)"
+                ],
+                borderColor: [
+                    "rgba(255, 99, 132, 1)",
+                    "rgba(54, 162, 235, 1)",
+                    "rgba(255, 206, 86, 1)",
+                    "rgba(75, 192, 192, 1)",
+                    "rgba(153, 102, 255, 1)",
+                    "rgba(255, 99, 132, 1)",
+                    "rgba(54, 162, 235, 1)",
+                    "rgba(255, 206, 86, 1)",
+                    "rgba(75, 192, 192, 1)",
+                    "rgba(153, 102, 255, 1)",
+                    "rgba(255, 99, 132, 1)",
+                    "rgba(54, 162, 235, 1)",
+                    "rgba(255, 206, 86, 1)",
+                    "rgba(75, 192, 192, 1)",
+                    "rgba(153, 102, 255, 1)"
+                ],
+                borderWidth: 1.5
+            }]
+        },
+        options: {
+            legend: {
+                display: false,//we are manually adding the axis labels with html
+                labels: {
+                    boxWidth: 0,
+                    boxHeight: 0,
+                    fontSize: 15,
+
+                    //fontColor:'#FFFFFF'
+                },
+            },
+            scales: {
+                yAxes: [{
+                    gridLines: {
+                        zeroLineColor: 'black'
+                    },
+                    ticks: {
+                        beginAtZero: true,
+                        stepSize: 1,
+                        suggestedMax: 2,
+                        fontColor: barChartSwitch(),
+                    },
+                    scaleLabel: {
+                        display: false, //we are manually adding the axis labels with html
+                        labelString: 'Anzahl der Siege (Mehrere Sieger pro Person möglich)'
+                    }
+                }],
+                xAxes: [{
+                    gridLines: {
+                        zeroLineColor: 'black'
+                    },
+                    ticks: {
+                        fontColor: barChartSwitch()
+                    },
+                }]
+            }
+        }
+    };
+
+
+window.mybarchart = new Chart(ctx, config);
 

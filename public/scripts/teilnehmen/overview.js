@@ -23,10 +23,11 @@ function overview() {
         document.getElementById("decisiveIndexSpan").style.opacity = 0;
         document.getElementById("decisiveIndex").innerHTML = "keins, weil es keinen klaren Gewinner gibt ";
     }
-
-    highlightDecidingCriteria(result.decidingIndex, "teilnehmenTable", tableBackgroundColor, lighterNavActiveTeilnehmenColor);
+    ratingResultTableSwitch();
+    highlightDecidingCriteria(result.decidingIndex, "teilnehmenTable");
     boldResult(result);
-    $("#firstTdFirstRowTeilnehmen").css("background-color", "#e6e6e6");
+    //$("#firstTdFirstRowTeilnehmen").css("background-color", "#e6e6e6");
+    
 
 
 
@@ -93,7 +94,8 @@ function createTableOverview(altArray, critArray,tableId) {
 		var cell = document.createElement("td");
 		cell.className = "alternativeTd";
 		var textnode = document.createTextNode(altArray[i]);
-		cell.appendChild(textnode);
+        cell.appendChild(textnode);
+        cell.style.backgroundColor = "grey";
 		FirstRow.appendChild(cell);
 	}
 	document.getElementById(tableId).appendChild(FirstRow);
@@ -128,18 +130,29 @@ function createTableOverview(altArray, critArray,tableId) {
  * highlights the decisive row
  * @param {int} index of the criteria that was decisive in the evaluation
  * @param {string} tableId of the table to work on
- * @param {string} defaultColor background color
- * @param {string} highlightColor highlights
  */
 
-function highlightDecidingCriteria(index, tableId, defaultColor,highlightColor) {
-    rows = document.getElementById(tableId).childNodes;
-    for (var i = 0; i < rows.length; i++) {
-        rows[i].style.backgroundColor = defaultColor;
+function highlightDecidingCriteria(index, tableId) {
+    if (nightmodeFlag) {
+        $("#firstTdFirstRowTeilnehmen").css("background-color", "#212121");
+        $("#firstTdFirstRowTeilnehmen").css("border", "1px solid white");
     }
+    else {
+        $("#firstTdFirstRowTeilnehmen").css("background-color", "#e6e6e6");
+        $("#firstTdFirstRowTeilnehmen").css("border", "1px solid black");
+    }
+    rows = document.getElementById(tableId).childNodes;
+    /*for (var i = 0; i < rows.length; i++) {
+        rows[i].style.backgroundColor = tableBackgroundSwitch();
+    }*/
 
     if (index >= 0) { // catch -1 aka undecisive
-        rows[index + 1].style.backgroundColor = highlightDecisiveSwitch();
+       //rows[index + 1].style.backgroundColor = highlightDecisiveSwitch();
+        cellRow = rows[index + 1].childNodes;
+        for (var i = 0; i < cellRow.length; i++) {
+            cellRow[i].style.backgroundColor = highlightDecisiveSwitch();
+            }
+       //rows[index + 1].style.backgroundColor = "red";
     }
 }
 

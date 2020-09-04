@@ -31,6 +31,7 @@ var resFlag = false;
 
 
 var teilnehmenFlag = false;
+var auswertenFlag = false;
 
 var alternativesContainer = "alternativesContainer";
 var criteriasContainer = "criteriasContainer";

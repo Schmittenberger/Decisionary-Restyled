@@ -1,3 +1,9 @@
+/*import { mybarchart } from "../scripts/auswerten/summary.js";
+
+window.mybarchart = mybarchart;
+mybarchart.destroy();*/
+
+
 class SummaryData
 {
     constructor()

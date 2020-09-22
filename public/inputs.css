@@ -51,6 +51,7 @@
 .typeTextTd {
     padding-top: 5px;
     white-space:nowrap;
+    display:none;
 }
 
 input {

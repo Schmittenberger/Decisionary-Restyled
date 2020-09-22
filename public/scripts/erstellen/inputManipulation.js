@@ -215,7 +215,10 @@ function createInput(type) {
     }
 
 	if (type == "Crit") {
-		index = critCounter++;
+        index = critCounter++;
+        if (index == 0) {
+            newInput.placeholder = "erstes Kriterium";
+        }
 		tempString = "Kriterium";
 		newInput.className = "CriteriaInputs";
 		newInputRow.className = "Criteria";
@@ -276,9 +279,9 @@ function createInput(type) {
 	//typeTextTd.appendChild(newSpanNumber);
     //typeTextTd.appendChild(newInput);
 
-    typeTextTd.appendChild(typeTextSpan);
-    typeTextTd.appendChild(newSpanNumber);
-    newInputRow.appendChild(typeTextTd);
+    //typeTextTd.appendChild(typeTextSpan);
+    //typeTextTd.appendChild(newSpanNumber);
+    //newInputRow.appendChild(typeTextTd);
 
     inputTd.appendChild(newInput);
     newInputRow.appendChild(inputTd);
